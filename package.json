@@ -10,12 +10,6 @@
     "packages/vue",
     "packages/svelte"
   ],
-  "scripts": {
-    "build": "node scripts/verify-public-core-export.mjs",
-    "build:workspaces": "node scripts/build-core-workspaces.mjs",
-    "verify:public-core": "node scripts/verify-public-core-export.mjs",
-    "type-check": "tsc --noEmit"
-  },
   "keywords": [
     "react",
     "grid",

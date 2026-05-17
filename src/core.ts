@@ -33,7 +33,6 @@ export {
   getPrevSearchIndex,
   useGridSearch,
 } from "./features/search";
-export * from "./features/column-groups/nodes";
 export {
   GridThemeProvider,
   availableThemes,
