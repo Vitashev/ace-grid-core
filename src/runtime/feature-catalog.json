@@ -1,0 +1,107 @@
+[
+  {
+    "key": "columnReorderBasic",
+    "label": "basic column reorder",
+    "edition": "core"
+  },
+  {
+    "key": "contextMenuBase",
+    "label": "context menu base",
+    "edition": "core"
+  },
+  {
+    "key": "advancedFiltering",
+    "label": "advanced filtering",
+    "edition": "pro"
+  },
+  {
+    "key": "contextMenuCustomization",
+    "label": "context menu customization",
+    "edition": "core"
+  },
+  {
+    "key": "excelIo",
+    "label": "Excel I/O",
+    "edition": "pro"
+  },
+  {
+    "key": "floatingFilter",
+    "label": "floating filter",
+    "edition": "core"
+  },
+  {
+    "key": "formula",
+    "label": "formula",
+    "edition": "pro"
+  },
+  {
+    "key": "grouping",
+    "label": "row grouping",
+    "edition": "pro"
+  },
+  {
+    "key": "keyedHeaders",
+    "label": "keyed headers",
+    "edition": "core"
+  },
+  {
+    "key": "multiSort",
+    "label": "multi-sort",
+    "edition": "core"
+  },
+  {
+    "key": "pinning",
+    "label": "pinning",
+    "edition": "core"
+  },
+  {
+    "key": "rowReorderBasic",
+    "label": "basic row reorder",
+    "edition": "core"
+  },
+  {
+    "key": "reorder",
+    "label": "reorder",
+    "edition": "pro"
+  },
+  {
+    "key": "sparkline",
+    "label": "sparkline",
+    "edition": "pro"
+  },
+  {
+    "key": "spanning",
+    "label": "spanning",
+    "edition": "pro"
+  },
+  {
+    "key": "treeData",
+    "label": "tree data",
+    "edition": "pro"
+  },
+  {
+    "key": "validation",
+    "label": "validation",
+    "edition": "pro"
+  },
+  {
+    "key": "charts",
+    "label": "charts",
+    "edition": "enterprise"
+  },
+  {
+    "key": "masterDetail",
+    "label": "master-detail",
+    "edition": "enterprise"
+  },
+  {
+    "key": "pivot",
+    "label": "pivot",
+    "edition": "enterprise"
+  },
+  {
+    "key": "serverRowModel",
+    "label": "server row model",
+    "edition": "enterprise"
+  }
+]

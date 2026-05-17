@@ -1,0 +1,33 @@
+{
+  "name": "@ace-grid/angular",
+  "version": "1.0.0",
+  "description": "Ace Grid Angular wrapper workspace package",
+  "type": "module",
+  "module": "./dist/angular.js",
+  "types": "./dist/angular.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/angular.d.ts",
+      "import": "./dist/angular.js"
+    },
+    "./core": {
+      "types": "./dist/angular-core.d.ts",
+      "import": "./dist/angular-core.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^20.0.0 || ^21.0.0",
+    "@angular/core": "^20.0.0 || ^21.0.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  }
+}

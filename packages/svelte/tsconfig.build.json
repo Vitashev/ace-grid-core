@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": false,
+    "outDir": "./dist",
+    "rootDir": "../../src"
+  },
+  "include": [
+    "../../src/svelte-module.d.ts",
+    "../../src/svelte.ts",
+    "../../src/svelte-core.ts"
+  ]
+}

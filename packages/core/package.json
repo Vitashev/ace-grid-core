@@ -1,0 +1,28 @@
+{
+  "name": "@ace-grid/core",
+  "version": "1.0.0",
+  "description": "Ace Grid core tier workspace package",
+  "type": "module",
+  "module": "./dist/core.js",
+  "types": "./dist/core.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js",
+      "require": "./dist/core.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  }
+}

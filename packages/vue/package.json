@@ -1,0 +1,32 @@
+{
+  "name": "@ace-grid/vue",
+  "version": "1.0.0",
+  "description": "Ace Grid Vue wrapper workspace package",
+  "type": "module",
+  "module": "./dist/vue.js",
+  "types": "./dist/vue.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js"
+    },
+    "./core": {
+      "types": "./dist/vue-core.d.ts",
+      "import": "./dist/vue-core.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "vue": "^3.5.0"
+  }
+}

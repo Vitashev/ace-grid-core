@@ -1,0 +1,35 @@
+{
+  "name": "@ace-grid/svelte",
+  "version": "1.0.0",
+  "description": "Ace Grid Svelte wrapper workspace package",
+  "type": "module",
+  "svelte": "./dist/svelte.js",
+  "module": "./dist/svelte.js",
+  "types": "./dist/svelte.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/svelte.d.ts",
+      "svelte": "./dist/svelte.js",
+      "import": "./dist/svelte.js"
+    },
+    "./core": {
+      "types": "./dist/svelte-core.d.ts",
+      "svelte": "./dist/svelte-core.js",
+      "import": "./dist/svelte-core.js"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "svelte": "^5.0.0"
+  }
+}

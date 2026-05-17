@@ -1,0 +1,28 @@
+{
+  "name": "@ace-grid/wc",
+  "version": "1.0.0",
+  "description": "Ace Grid Web Component wrapper workspace package",
+  "type": "module",
+  "module": "./dist/wc.js",
+  "types": "./dist/wc.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/wc.d.ts",
+      "import": "./dist/wc.js",
+      "require": "./dist/wc.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
+  "peerDependencies": {
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  }
+}
