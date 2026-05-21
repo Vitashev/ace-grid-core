@@ -4,7 +4,7 @@ import type { GridColumn, GridRowGroup } from "../../types";
 import {
   buildSpanCoverage,
   type SpanCoverage,
-} from "../../features/span/hooks/useSpanCoverage";
+} from "../../runtime/publicCoreSupport";
 
 type VirtualColumnsState = {
   visible: GridColumn[];

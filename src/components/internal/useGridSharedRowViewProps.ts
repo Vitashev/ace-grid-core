@@ -22,7 +22,7 @@ import type {
   ColumnResizeHandleOverrides,
   ColumnResizeHandleProps,
 } from "../../features/resize";
-import type { GridValidationDisplayConfig } from "../../features/validation/utils";
+import type { GridValidationDisplayConfig } from "../../runtime/publicCoreSupport";
 import type { FormulaHighlightRange } from "../RowGroupView";
 
 type SharedMasterDetailView = {

@@ -6,7 +6,7 @@ import type {
   GridRowGroupingRowMoveEvent,
   GridRowGroupingValueMeta,
 } from "../../types";
-import type { RowGroupingModel } from "../../features/grouping/buildRowGroupingModel";
+import type { RowGroupingModel } from "../../runtime/publicCoreSupport";
 
 type UseGridRowMovementCommandsArgs = {
   groupingModel: RowGroupingModel | null;

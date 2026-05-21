@@ -72,7 +72,7 @@ import { formatCellValue } from "../features/cell-format";
 import type {
   FormulaGridState,
   FormulaGridEvalOptions,
-} from "../features/formula";
+} from "../runtime/publicCoreSupport";
 import {
   useGridPaginationPageClamp,
   useGridPaginationStateController,

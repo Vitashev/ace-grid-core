@@ -3,7 +3,7 @@ import { useCallback, type Dispatch, type SetStateAction } from "react";
 import { isSystemCol } from "../../features/cell-selection";
 import { coerceInputValue } from "../../features/cell-format";
 import { primeCompiledCellFormat } from "../../features/cell-format/compiledCellFormat";
-import type { FormulaGridEvalOptions } from "../../features/formula";
+import type { FormulaGridEvalOptions } from "../../runtime/publicCoreSupport";
 import type {
   CellFormat,
   CellValue,

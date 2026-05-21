@@ -10,7 +10,7 @@ import type {
   GridRowGroup,
 } from "../types";
 import type { GridThemeTokens } from "../features/theming/types";
-import type { SpanCoverage } from "../features/span/hooks/useSpanCoverage";
+import type { SpanCoverage } from "../runtime/publicCoreSupport";
 import type { SsrmSelectionLookupCache } from "../features/selection/ssrmSelectionState";
 import type {
   RowSelectionChangeMeta,
@@ -23,7 +23,7 @@ import type {
   ColumnResizeHandleOverrides,
   ColumnResizeHandleProps,
 } from "../features/resize";
-import type { GridValidationDisplayConfig } from "../features/validation/utils";
+import type { GridValidationDisplayConfig } from "./publicCoreSupport";
 
 type CenterBodyProps = {
   enableVirtualization: boolean;

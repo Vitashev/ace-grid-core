@@ -25,58 +25,58 @@ import type {
   GridSortConfig,
   GridTreeDataProps,
 } from "../types";
-import type { IntegratedChartPanel } from "../features/charts/components/IntegratedChartPanel";
-import type { useGridChartsController } from "../features/charts/hooks/useGridChartsController";
+import type { IntegratedChartPanel } from "./publicCoreSupport";
+import type { useGridChartsController } from "./publicCoreSupport";
 import type {
   FormulaGridEvalOptions,
   FormulaGridState,
   FormulaReferenceRange,
-} from "../features/formula";
-import type { useFormulaRangePick } from "../features/formula/hooks/useFormulaRangePick";
+} from "../runtime/publicCoreSupport";
+import type { useFormulaRangePick } from "./publicCoreSupport";
 import type {
   exportGridToExcel,
   importGridFromExcel,
-} from "../features/io/excel";
-import type { buildRowGroupingModel } from "../features/grouping/buildRowGroupingModel";
-import type { buildTreeDataModel } from "../features/tree-data/buildTreeDataModel";
+} from "./publicCoreSupport";
+import type { buildRowGroupingModel } from "./publicCoreSupport";
+import type { buildTreeDataModel } from "./publicCoreSupport";
 import type {
   buildClientPivotDataset,
   buildPivotColumnsFromFields,
-} from "../features/pivoting";
-import type { useMasterDetail } from "../features/master-detail/hooks/useMasterDetail";
+} from "./publicCoreSupport";
+import type { useMasterDetail } from "./publicCoreSupport";
 import type { RowPinCell } from "../features/pinning/components/RowPinCell";
 import type { usePinnedSets } from "../features/pinning/hooks/usePinnedSets";
 import type { useStickyOffsets } from "../features/pinning/hooks/useStickyOffsets";
 import type { RowOrderCell } from "../features/reorder/components/RowOrderCell";
 import type { useColumnDnD } from "../features/reorder/hooks/useColumnDnD";
 import type { useRowDnD } from "../features/reorder/hooks/useRowDnD";
-import type { useSpan } from "../features/spanning/hooks/useSpan";
+import type { useSpan } from "./publicCoreSupport";
 import type {
   GridSparklineProvider,
   Sparkline,
   useGridSparkline,
-} from "../features/sparkline";
+} from "./publicCoreSupport";
 import type {
   buildSparklineTitle,
   hasSparklineData,
   normalizeSparklineData,
   resolveSparklineOptions,
-} from "../features/sparkline/utils";
+} from "./publicCoreSupport";
 import type {
   resolveGridTreeDataPathColumnKeys,
   resolveGridTreeDataPathResolver,
-} from "../features/tree-data/utils";
-import type { getValidationClassNames } from "../features/validation/utils";
-import type { useGridValidation } from "../features/validation/hooks/useValidation";
-import type { useGridValidationBridge } from "../features/validation/hooks/useGridValidationBridge";
-import type { normalizeGridServerPivotValueColumns, normalizeGridServerRequestColumns, normalizeGridServerRowModelConfig } from "../features/server-row-model/normalize";
-import type { buildServerGroupingRequest, buildServerHierarchyConfigKey, buildServerPivotRequest, buildServerTreeDataRequest } from "../features/server-row-model/requestBuilders";
-import type { mapSsrmBaseRowIndexToDisplay, resolveSsrmDisplayRowIndex } from "../features/server-row-model/ssrmDisplayOverlay";
-import type { useServerRowModel } from "../features/server-row-model/hooks/useServerRowModel";
-import type { useServerRowModelApiRef } from "../features/server-row-model/hooks/useServerRowModelApiRef";
-import type { useSsrmGroupToggleOverlay } from "../features/server-row-model/hooks/useSsrmGroupToggleOverlay";
-import type { useSsrmLoadingUiState } from "../features/server-row-model/hooks/useSsrmLoadingUiState";
-import type { useSsrmViewportScrollCycle } from "../features/server-row-model/hooks/useSsrmViewportScrollCycle";
+} from "./publicCoreSupport";
+import type { getValidationClassNames } from "./publicCoreSupport";
+import type { useGridValidation } from "./publicCoreSupport";
+import type { useGridValidationBridge } from "./publicCoreSupport";
+import type { normalizeGridServerPivotValueColumns, normalizeGridServerRequestColumns, normalizeGridServerRowModelConfig } from "./publicCoreSupport";
+import type { buildServerGroupingRequest, buildServerHierarchyConfigKey, buildServerPivotRequest, buildServerTreeDataRequest } from "./publicCoreSupport";
+import type { mapSsrmBaseRowIndexToDisplay, resolveSsrmDisplayRowIndex } from "./publicCoreSupport";
+import type { useServerRowModel } from "./publicCoreSupport";
+import type { useServerRowModelApiRef } from "./publicCoreSupport";
+import type { useSsrmGroupToggleOverlay } from "./publicCoreSupport";
+import type { useSsrmLoadingUiState } from "./publicCoreSupport";
+import type { useSsrmViewportScrollCycle } from "./publicCoreSupport";
 
 export interface GridFormulaBarComponentProps {
   value: string;

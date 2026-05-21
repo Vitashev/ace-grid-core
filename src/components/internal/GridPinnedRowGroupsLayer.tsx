@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 
 import type { GridColumn, GridRowGroup } from "../../types";
-import type { SpanCoverage } from "../../features/span/hooks/useSpanCoverage";
+import type { SpanCoverage } from "../../runtime/publicCoreSupport";
 import type { GridSharedRowViewProps } from "./useGridSharedRowViewProps";
 import { RowGroup } from "../RowGroup";
 import { RowGroupView } from "../RowGroupView";

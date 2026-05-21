@@ -1,7 +1,7 @@
 {
   "name": "@ace-grid/core",
-  "version": "1.0.0",
-  "description": "Ace Grid core tier workspace package",
+  "version": "1.0.5",
+  "description": "Ace Grid Core: free React data grid runtime with editing, selection, theming, filtering, sorting, pagination, virtualization, CSV I/O, and core schema support.",
   "type": "module",
   "module": "./dist/core.js",
   "types": "./dist/core.d.ts",
@@ -13,16 +13,34 @@
     }
   },
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.build.json"
+    "build": "vite build && node ../../scripts/write-public-package-types.mjs core"
   },
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "peerDependencies": {
     "react": "19.1.1",
     "react-dom": "19.1.1"
-  }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vitashev/ace-grid-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vitashev/ace-grid-core/issues"
+  },
+  "homepage": "https://github.com/Vitashev/ace-grid-core#readme",
+  "keywords": [
+    "ace-grid",
+    "react",
+    "data-grid",
+    "spreadsheet",
+    "table",
+    "typescript"
+  ]
 }

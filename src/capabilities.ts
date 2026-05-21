@@ -190,11 +190,6 @@ export const GRID_CAPABILITY_DEFINITIONS = {
     runtimeFeature: "masterDetail",
     description: "Master/detail rows and detail renderers.",
   }),
-  "schema.ai": defineGridCapability({
-    tier: "enterprise",
-    dependsOn: ["schema.core"],
-    description: "AI schema helpers and conversation-oriented contracts.",
-  }),
 } as const satisfies Record<string, GridCapabilityDefinition>;
 
 export type GridCapabilityId = keyof typeof GRID_CAPABILITY_DEFINITIONS;

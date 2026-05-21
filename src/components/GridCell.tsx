@@ -25,7 +25,7 @@ import {
   splitSearchMatches,
   useGridSearch,
 } from "../features/search";
-import type { GridValidationDisplayConfig } from "../features/validation/utils";
+import type { GridValidationDisplayConfig } from "./publicCoreSupport";
 import { buildGridBodyCellId } from "../features/interaction/utils";
 import { renderLoadingCellContent } from "./loadingCellRenderer";
 import { cx } from "../utils/cx";

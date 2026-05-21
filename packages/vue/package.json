@@ -1,7 +1,7 @@
 {
   "name": "@ace-grid/vue",
-  "version": "1.0.0",
-  "description": "Ace Grid Vue wrapper workspace package",
+  "version": "1.0.5",
+  "description": "Vue wrapper for Ace Grid Core, Pro, and Enterprise packages.",
   "type": "module",
   "module": "./dist/vue.js",
   "types": "./dist/vue.d.ts",
@@ -16,17 +16,34 @@
     }
   },
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.build.json"
+    "build": "vite build && node ../../scripts/write-public-package-types.mjs vue"
   },
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "peerDependencies": {
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "vue": "^3.5.0"
-  }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vitashev/ace-grid-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vitashev/ace-grid-core/issues"
+  },
+  "homepage": "https://github.com/Vitashev/ace-grid-core#readme",
+  "keywords": [
+    "ace-grid",
+    "vue",
+    "data-grid",
+    "spreadsheet",
+    "typescript"
+  ]
 }

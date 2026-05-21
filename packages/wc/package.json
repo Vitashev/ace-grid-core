@@ -1,7 +1,7 @@
 {
   "name": "@ace-grid/wc",
-  "version": "1.0.0",
-  "description": "Ace Grid Web Component wrapper workspace package",
+  "version": "1.0.5",
+  "description": "Ace Grid Web Component wrapper for framework-neutral grid usage.",
   "type": "module",
   "module": "./dist/wc.js",
   "types": "./dist/wc.d.ts",
@@ -13,16 +13,33 @@
     }
   },
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.build.json"
+    "build": "vite build && node ../../scripts/write-public-package-types.mjs wc"
   },
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "peerDependencies": {
     "react": "19.1.1",
     "react-dom": "19.1.1"
-  }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vitashev/ace-grid-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vitashev/ace-grid-core/issues"
+  },
+  "homepage": "https://github.com/Vitashev/ace-grid-core#readme",
+  "keywords": [
+    "ace-grid",
+    "web-components",
+    "custom-elements",
+    "data-grid",
+    "spreadsheet"
+  ]
 }

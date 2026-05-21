@@ -1,7 +1,7 @@
 {
   "name": "@ace-grid/svelte",
-  "version": "1.0.0",
-  "description": "Ace Grid Svelte wrapper workspace package",
+  "version": "1.0.5",
+  "description": "Svelte wrapper for Ace Grid Core, Pro, and Enterprise packages.",
   "type": "module",
   "svelte": "./dist/svelte.js",
   "module": "./dist/svelte.js",
@@ -19,17 +19,34 @@
     }
   },
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.build.json"
+    "build": "vite build && node ../../scripts/write-public-package-types.mjs svelte"
   },
   "publishConfig": {
     "access": "public"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "peerDependencies": {
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "svelte": "^5.0.0"
-  }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vitashev/ace-grid-core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vitashev/ace-grid-core/issues"
+  },
+  "homepage": "https://github.com/Vitashev/ace-grid-core#readme",
+  "keywords": [
+    "ace-grid",
+    "svelte",
+    "data-grid",
+    "spreadsheet",
+    "typescript"
+  ]
 }

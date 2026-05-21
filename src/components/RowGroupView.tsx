@@ -14,8 +14,8 @@ import type {
   GridRowGroupSpan,
 } from "../types";
 import type { GridThemeTokens } from "../features/theming/types";
-import type { SpanCoverage } from "../features/span/hooks/useSpanCoverage";
-import { spanCellKey } from "../features/span/hooks/useSpanCoverage";
+import type { SpanCoverage } from "../runtime/publicCoreSupport";
+import { spanCellKey } from "../runtime/publicCoreSupport";
 import { GridCell } from "./GridCell";
 import type { SsrmSelectionLookupCache } from "../features/selection/ssrmSelectionState";
 import { VirtualizedGridCell } from "../features/virtual/components/VirtualizedGridCell";
@@ -35,7 +35,7 @@ import {
 } from "../features/search";
 import { getGridRuntimeModules } from "../runtime/modules";
 import { cx } from "../utils/cx";
-import type { GridValidationDisplayConfig } from "../features/validation/utils";
+import type { GridValidationDisplayConfig } from "./publicCoreSupport";
 import {
   CELL_BORDER,
   EDIT_BORDER,
@@ -52,7 +52,7 @@ import type { RowDragState } from "../features/reorder/hooks/useRowDnD";
 import type { EditingCellState } from "../features/edit/types";
 import { useGridStoreSelector } from "../features/grid-store";
 import type { GridStoreState } from "../features/grid-store/store";
-import { type FormulaReferenceRange } from "../features/formula";
+import { type FormulaReferenceRange } from "../runtime/publicCoreSupport";
 
 type RowGroupViewProps = {
   group: GridRowGroup;
