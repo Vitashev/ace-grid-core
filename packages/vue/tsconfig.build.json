@@ -9,7 +9,10 @@
     "rootDir": "../../src"
   },
   "include": [
+    "../../src/externalTierRuntime.d.ts",
     "../../src/vue.ts",
-    "../../src/vue-core.ts"
+    "../../src/vue-core.ts",
+    "../../src/vue-pro.ts",
+    "../../src/vue-enterprise.ts"
   ]
 }

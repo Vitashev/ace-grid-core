@@ -1,4 +1,4 @@
-import { Grid, useGrid } from "@ace-grid/core";
+import { Grid, useGrid } from "@ace-grid/enterprise";
 import { registerAceGridVueDefaultElement } from "./vueTier";
 import type { GridActions, UseGridOptions } from "./hooks/useGrid";
 import type { GridRow } from "./types";
@@ -10,7 +10,7 @@ registerAceGridVueDefaultElement(
 
 export { default } from "./vue";
 export * from "./vue";
-export * from "@ace-grid/core";
+export * from "@ace-grid/enterprise";
 export {
   defineAceGridElement,
   defineAceGridUseGridElement,

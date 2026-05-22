@@ -14,11 +14,21 @@ export default defineConfig({
       entry: {
         vue: resolve(rootDir, "src/vue.ts"),
         "vue-core": resolve(rootDir, "src/vue-core.ts"),
+        "vue-pro": resolve(rootDir, "src/vue-pro.ts"),
+        "vue-enterprise": resolve(rootDir, "src/vue-enterprise.ts"),
       },
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["vue", "react", "react-dom", "react-dom/client"],
+      external: [
+        "@ace-grid/core",
+        "@ace-grid/pro",
+        "@ace-grid/enterprise",
+        "vue",
+        "react",
+        "react-dom",
+        "react-dom/client",
+      ],
       output: {
         exports: "named",
         format: "es",

@@ -16,11 +16,16 @@ export default defineConfig({
       entry: {
         svelte: resolve(rootDir, "src/svelte.ts"),
         "svelte-core": resolve(rootDir, "src/svelte-core.ts"),
+        "svelte-pro": resolve(rootDir, "src/svelte-pro.ts"),
+        "svelte-enterprise": resolve(rootDir, "src/svelte-enterprise.ts"),
       },
       formats: ["es"],
     },
     rollupOptions: {
       external: [
+        "@ace-grid/core",
+        "@ace-grid/pro",
+        "@ace-grid/enterprise",
         "svelte",
         /^svelte(\/.*)?$/,
         "react",

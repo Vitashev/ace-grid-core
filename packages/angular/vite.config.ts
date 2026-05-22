@@ -14,11 +14,16 @@ export default defineConfig({
       entry: {
         angular: resolve(rootDir, "src/angular.ts"),
         "angular-core": resolve(rootDir, "src/angular-core.ts"),
+        "angular-pro": resolve(rootDir, "src/angular-pro.ts"),
+        "angular-enterprise": resolve(rootDir, "src/angular-enterprise.ts"),
       },
       formats: ["es"],
     },
     rollupOptions: {
       external: [
+        "@ace-grid/core",
+        "@ace-grid/pro",
+        "@ace-grid/enterprise",
         "@angular/common",
         "@angular/core",
         "react",

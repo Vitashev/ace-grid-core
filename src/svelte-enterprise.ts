@@ -1,16 +1,16 @@
-import { Grid, useGrid } from "@ace-grid/core";
-import { registerAceGridVueDefaultElement } from "./vueTier";
+import { Grid, useGrid } from "@ace-grid/enterprise";
+import { registerAceGridSvelteDefaultElement } from "./svelteTier";
 import type { GridActions, UseGridOptions } from "./hooks/useGrid";
 import type { GridRow } from "./types";
 
-registerAceGridVueDefaultElement(
+registerAceGridSvelteDefaultElement(
   Grid as unknown as import("react").ComponentType<Partial<import("./types").GridProps>>,
   useGrid as unknown as (options: UseGridOptions) => [GridRow[], GridActions],
 );
 
-export { default } from "./vue";
-export * from "./vue";
-export * from "@ace-grid/core";
+export { default } from "./svelte";
+export * from "./svelte";
+export * from "@ace-grid/enterprise";
 export {
   defineAceGridElement,
   defineAceGridUseGridElement,

@@ -9,7 +9,10 @@
     "rootDir": "../../src"
   },
   "include": [
+    "../../src/externalTierRuntime.d.ts",
     "../../src/angular.ts",
-    "../../src/angular-core.ts"
+    "../../src/angular-core.ts",
+    "../../src/angular-pro.ts",
+    "../../src/angular-enterprise.ts"
   ]
 }

@@ -135,14 +135,20 @@ const filesByPackage = {
   angular: {
     "angular.d.ts": angularTypes,
     "angular-core.d.ts": angularTypes,
+    "angular-pro.d.ts": angularTypes,
+    "angular-enterprise.d.ts": angularTypes,
   },
   vue: {
     "vue.d.ts": vueTypes,
     "vue-core.d.ts": vueTypes,
+    "vue-pro.d.ts": vueTypes,
+    "vue-enterprise.d.ts": vueTypes,
   },
   svelte: {
     "svelte.d.ts": svelteTypes,
     "svelte-core.d.ts": svelteTypes,
+    "svelte-pro.d.ts": svelteTypes,
+    "svelte-enterprise.d.ts": svelteTypes,
   },
 };
 

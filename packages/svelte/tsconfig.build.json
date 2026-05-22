@@ -9,8 +9,11 @@
     "rootDir": "../../src"
   },
   "include": [
+    "../../src/externalTierRuntime.d.ts",
     "../../src/svelte-module.d.ts",
     "../../src/svelte.ts",
-    "../../src/svelte-core.ts"
+    "../../src/svelte-core.ts",
+    "../../src/svelte-pro.ts",
+    "../../src/svelte-enterprise.ts"
   ]
 }

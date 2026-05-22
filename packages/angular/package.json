@@ -1,7 +1,7 @@
 {
   "name": "@ace-grid/angular",
   "version": "1.0.5",
-  "description": "Angular wrapper for Ace Grid Core, Pro, and Enterprise packages.",
+  "description": "Tier-neutral Angular wrapper for Ace Grid Core, Pro, and Enterprise runtimes.",
   "type": "module",
   "module": "./dist/angular.js",
   "types": "./dist/angular.d.ts",
@@ -13,6 +13,14 @@
     "./core": {
       "types": "./dist/angular-core.d.ts",
       "import": "./dist/angular-core.js"
+    },
+    "./pro": {
+      "types": "./dist/angular-pro.d.ts",
+      "import": "./dist/angular-pro.js"
+    },
+    "./enterprise": {
+      "types": "./dist/angular-enterprise.d.ts",
+      "import": "./dist/angular-enterprise.js"
     }
   },
   "scripts": {
@@ -26,10 +34,24 @@
     "README.md"
   ],
   "peerDependencies": {
+    "@ace-grid/core": "1.0.5",
+    "@ace-grid/pro": "1.0.5",
+    "@ace-grid/enterprise": "1.0.5",
     "@angular/common": "^20.0.0 || ^21.0.0",
     "@angular/core": "^20.0.0 || ^21.0.0",
     "react": "19.1.1",
     "react-dom": "19.1.1"
+  },
+  "peerDependenciesMeta": {
+    "@ace-grid/core": {
+      "optional": true
+    },
+    "@ace-grid/pro": {
+      "optional": true
+    },
+    "@ace-grid/enterprise": {
+      "optional": true
+    }
   },
   "license": "MIT",
   "repository": {
