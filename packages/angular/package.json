@@ -1,6 +1,6 @@
 {
   "name": "@ace-grid/angular",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Tier-neutral Angular wrapper for Ace Grid Core, Pro, and Enterprise runtimes.",
   "type": "module",
   "module": "./dist/angular.js",
@@ -34,9 +34,9 @@
     "README.md"
   ],
   "peerDependencies": {
-    "@ace-grid/core": "1.0.5",
-    "@ace-grid/pro": "1.0.5",
-    "@ace-grid/enterprise": "1.0.5",
+    "@ace-grid/core": ">=1.0.6 <2.0.0",
+    "@ace-grid/pro": ">=1.0.6 <2.0.0",
+    "@ace-grid/enterprise": ">=1.0.6 <2.0.0",
     "@angular/common": "^20.0.0 || ^21.0.0",
     "@angular/core": "^20.0.0 || ^21.0.0",
     "react": "19.1.1",

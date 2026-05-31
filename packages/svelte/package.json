@@ -1,6 +1,6 @@
 {
   "name": "@ace-grid/svelte",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Tier-neutral Svelte wrapper for Ace Grid Core, Pro, and Enterprise runtimes.",
   "type": "module",
   "svelte": "./dist/svelte.js",
@@ -39,9 +39,9 @@
     "README.md"
   ],
   "peerDependencies": {
-    "@ace-grid/core": "1.0.5",
-    "@ace-grid/pro": "1.0.5",
-    "@ace-grid/enterprise": "1.0.5",
+    "@ace-grid/core": ">=1.0.6 <2.0.0",
+    "@ace-grid/pro": ">=1.0.6 <2.0.0",
+    "@ace-grid/enterprise": ">=1.0.6 <2.0.0",
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "svelte": "^5.0.0"

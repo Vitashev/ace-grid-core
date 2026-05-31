@@ -1,6 +1,6 @@
 {
   "name": "ace-grid-core-workspace",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "private": true,
   "description": "Ace Grid public core workspace generated from the private source repository.",
   "workspaces": [

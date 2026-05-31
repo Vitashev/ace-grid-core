@@ -1,6 +1,6 @@
 {
   "name": "@ace-grid/wc",
-  "version": "1.0.5",
+  "version": "1.0.7",
   "description": "Ace Grid Web Component wrapper for framework-neutral grid usage.",
   "type": "module",
   "module": "./dist/wc.js",
@@ -23,8 +23,22 @@
     "README.md"
   ],
   "peerDependencies": {
+    "@ace-grid/core": ">=1.0.6 <2.0.0",
+    "@ace-grid/pro": ">=1.0.6 <2.0.0",
+    "@ace-grid/enterprise": ">=1.0.6 <2.0.0",
     "react": "19.1.1",
     "react-dom": "19.1.1"
+  },
+  "peerDependenciesMeta": {
+    "@ace-grid/core": {
+      "optional": true
+    },
+    "@ace-grid/pro": {
+      "optional": true
+    },
+    "@ace-grid/enterprise": {
+      "optional": true
+    }
   },
   "license": "MIT",
   "repository": {
