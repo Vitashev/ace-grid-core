@@ -1,29 +1,77 @@
 # @ace-grid/core
 
-Free Ace Grid Core React runtime with editing, selection, sorting, filtering, pagination, search, pinning, theming, resize, virtualization, keyed headers, and Core wrapper support.
+Ace Grid Core is the free, MIT-licensed React runtime for Ace Grid. It provides
+the production foundation for app-grade data grids: editing, selection, sorting,
+filtering, pagination, search, pinning, resizing, theming, virtualization, CSV
+I/O, keyed headers, and core schema-aware state helpers.
 
-This package is generated from the public Core export in:
+Use this package when you need the Community/Core grid runtime without paid Pro
+or Enterprise modules.
 
-https://github.com/Vitashev/ace-grid-core
+## Documentation
 
-It contains only free/Core Ace Grid capabilities. Pro and Enterprise source,
-runtime modules, and paid feature artifacts are intentionally excluded.
+- Product docs: https://ace-grid.com/docs
+- API reference and generated API spec: https://ace-grid.com/api
+- Public Core source export: https://github.com/Vitashev/ace-grid-core
 
 ## Install
 
 ```bash
-npm install @ace-grid/core
+npm install @ace-grid/core react react-dom
 ```
 
-## Usage
+## Quick start
 
-```ts
+```tsx
 import { Grid } from "@ace-grid/core";
 
-const rows = [{ id: "r1", data: { name: "Ada", status: "Active" } }];
-const columns = [{ key: "name", title: "Name" }, { key: "status", title: "Status" }];
+const rows = [
+  { id: "1", company: "HelioBank", segment: "Enterprise", revenue: 4200000 },
+  { id: "2", company: "Northstar AI", segment: "Strategic", revenue: 3100000 },
+];
 
-export function Example() {
-  return <Grid data={{ rows, columns }} layout={{ height: 420 }} />;
+const columns = [
+  { key: "company", title: "Company", editable: true },
+  { key: "segment", title: "Segment", filterable: true },
+  { key: "revenue", title: "Revenue", type: "number", sortable: true },
+];
+
+export function CustomersGrid() {
+  return (
+    <Grid
+      data={{ rows, columns }}
+      layout={{ height: 520 }}
+    />
+  );
 }
 ```
+
+## Included Core Capabilities
+
+- React grid runtime and `useGrid` state/actions hook.
+- Cell editing, row and column selection, sorting, filtering, search, pagination,
+  pinning, resizing, and reorder primitives.
+- Virtualized rendering for larger row and column counts.
+- Theme tokens and styling hooks for product integration.
+- CSV I/O and core schema extraction/application helpers.
+
+## Package boundaries
+
+`@ace-grid/core` contains only free/Core Ace Grid capabilities. Pro and
+Enterprise source, runtime modules, and paid feature artifacts are intentionally
+excluded from this package and from the public Core source export.
+
+Use `@ace-grid/pro` for formulas, validation, Excel workflows, grouping, tree
+data, sparklines, and advanced workflow features. Use `@ace-grid/enterprise`
+for charts, pivoting, master-detail, server row model, and enterprise-scale
+features.
+
+## Support
+
+For documentation, examples, and the generated API spec, use the Ace Grid portal
+at https://ace-grid.com. For package issues, use the public Core repository:
+https://github.com/Vitashev/ace-grid-core/issues
+
+## License
+
+MIT. See `LICENSE` in this package.

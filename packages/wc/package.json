@@ -1,6 +1,6 @@
 {
   "name": "@ace-grid/wc",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Ace Grid Web Component wrapper for framework-neutral grid usage.",
   "type": "module",
   "module": "./dist/wc.js",
@@ -20,7 +20,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "peerDependencies": {
     "@ace-grid/core": ">=1.0.6 <2.0.0",

@@ -1,6 +1,6 @@
 {
   "name": "@ace-grid/vue",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Tier-neutral Vue wrapper for Ace Grid Core, Pro, and Enterprise runtimes.",
   "type": "module",
   "module": "./dist/vue.js",
@@ -31,7 +31,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "peerDependencies": {
     "@ace-grid/core": ">=1.0.6 <2.0.0",

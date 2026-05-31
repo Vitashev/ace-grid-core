@@ -1,6 +1,6 @@
 {
   "name": "@ace-grid/core",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Ace Grid Core: free React data grid runtime with editing, selection, theming, filtering, sorting, pagination, virtualization, CSV I/O, and core schema support.",
   "type": "module",
   "module": "./dist/core.js",
@@ -20,7 +20,8 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "peerDependencies": {
     "react": "19.1.1",
@@ -34,7 +35,7 @@
   "bugs": {
     "url": "https://github.com/Vitashev/ace-grid-core/issues"
   },
-  "homepage": "https://github.com/Vitashev/ace-grid-core#readme",
+  "homepage": "https://ace-grid.com/docs",
   "keywords": [
     "ace-grid",
     "react",
