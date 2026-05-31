@@ -1,12 +1,14 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": false,
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationMap": false,
     "outDir": "./dist",
-    "rootDir": "../../src"
+    "rootDir": "./src"
   },
-  "include": ["../../src/wc.ts"]
+  "include": [
+    "src/core.ts"
+  ]
 }
