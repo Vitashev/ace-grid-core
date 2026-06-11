@@ -21,6 +21,7 @@ import {
 import { useGridTheme } from "../../theming";
 import type { ColumnFilterState } from "../../theming/types";
 import { resolveFilterValueChoices } from "../utils/filterValueChoices";
+import { ThemedSelect } from "../../../components/ThemedSelect";
 
 interface ColumnFilterProps {
   column: GridColumn;
@@ -777,47 +778,48 @@ export const ColumnFilter: React.FC<ColumnFilterProps> = memo(
 
       if (column.type === "boolean" && condition.operator === "equals") {
         return (
-          <select
+          <ThemedSelect
             value={String(condition.value ?? "")}
-            onChange={(e) =>
+            onChange={(value) =>
               onChange({
                 ...condition,
-                value: e.target.value === "" ? "" : e.target.value === "true",
+                value: value === "" ? "" : value === "true",
               })
             }
             className="ace-grid__column-filter-select"
-            aria-label={`${column.title} boolean value`}
-          >
-            <option value="">Select value</option>
-            <option value="true">TRUE</option>
-            <option value="false">FALSE</option>
-          </select>
+            ariaLabel={`${column.title} boolean value`}
+            options={[
+              { value: "", label: "Select value" },
+              { value: "true", label: "TRUE" },
+              { value: "false", label: "FALSE" },
+            ]}
+          />
         );
       }
 
       if (column.type === "select" && condition.operator === "equals") {
         return (
-          <select
+          <ThemedSelect
             value={isBlankValue(condition.value) ? "" : normalizeValue(condition.value)}
-            onChange={(e) =>
+            onChange={(value) =>
               onChange({
                 ...condition,
                 value:
-                  e.target.value === ""
+                  value === ""
                     ? ""
-                    : (valueKeyMap.get(e.target.value) ?? e.target.value),
+                    : (valueKeyMap.get(value) ?? value),
               })
             }
             className="ace-grid__column-filter-select"
-            aria-label={`${column.title} selected value`}
-          >
-            <option value="">Select value</option>
-            {choices.map((choice, index) => (
-              <option key={`${index}-${choice.key}`} value={choice.key}>
-                {choice.label}
-              </option>
-            ))}
-          </select>
+            ariaLabel={`${column.title} selected value`}
+            options={[
+              { value: "", label: "Select value" },
+              ...choices.map((choice) => ({
+                value: choice.key,
+                label: choice.label,
+              })),
+            ]}
+          />
         );
       }
 
@@ -863,21 +865,22 @@ export const ColumnFilter: React.FC<ColumnFilterProps> = memo(
             </div>
 
             {block.conditions.length > 1 && (
-              <select
+              <ThemedSelect
                 value={block.join}
-                onChange={(e) =>
+                onChange={(value) =>
                   updateAdvancedBlock(block.id, (current) =>
                     current.kind === "condition"
-                      ? { ...current, join: e.target.value as FilterJoin }
+                      ? { ...current, join: value as FilterJoin }
                       : current,
                   )
                 }
                 className="ace-grid__column-filter-select ace-grid__column-filter-mb-8"
-                aria-label={`Condition block ${index + 1} join`}
-              >
-                <option value="and">AND</option>
-                <option value="or">OR</option>
-              </select>
+                ariaLabel={`Condition block ${index + 1} join`}
+                options={[
+                  { value: "and", label: "AND" },
+                  { value: "or", label: "OR" },
+                ]}
+              />
             )}
 
             {block.conditions.map((condition, idx) => (
@@ -886,18 +889,18 @@ export const ColumnFilter: React.FC<ColumnFilterProps> = memo(
                 className="ace-grid__column-filter-condition-item"
               >
                 <div className="ace-grid__column-filter-condition-row">
-                  <select
+                  <ThemedSelect
                     value={condition.operator}
-                    onChange={(e) =>
+                    onChange={(value) =>
                       updateAdvancedBlock(block.id, (current) => {
                         if (current.kind !== "condition") return current;
                         const nextConditions = current.conditions.map((c, i) =>
                           i === idx
                             ? {
                                 ...c,
-                                operator: e.target.value as FilterOperator,
+                                operator: value as FilterOperator,
                                 value:
-                                  e.target.value === "between" &&
+                                  value === "between" &&
                                   !Array.isArray(c.value)
                                     ? ["", ""]
                                     : c.value,
@@ -908,14 +911,9 @@ export const ColumnFilter: React.FC<ColumnFilterProps> = memo(
                       })
                     }
                     className="ace-grid__column-filter-select ace-grid__column-filter-condition-operator"
-                    aria-label={`Condition block ${index + 1} operator ${idx + 1}`}
-                  >
-                    {getOperatorOptions(column).map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+                    ariaLabel={`Condition block ${index + 1} operator ${idx + 1}`}
+                    options={getOperatorOptions(column)}
+                  />
                   {block.conditions.length > 1 && (
                     <button
                       type="button"
@@ -1350,28 +1348,23 @@ export const ColumnFilter: React.FC<ColumnFilterProps> = memo(
                 Filter {column.title}
               </label>
 
-              <select
+              <ThemedSelect
                 value={condition1.operator}
-                onChange={(e) =>
+                onChange={(value) =>
                   setCondition1({
                     ...condition1,
-                    operator: e.target.value as FilterOperator,
+                    operator: value as FilterOperator,
                     value:
-                      e.target.value === "between" &&
+                      value === "between" &&
                       !Array.isArray(condition1.value)
                         ? ["", ""]
                         : condition1.value,
                   })
                 }
                 className="ace-grid__column-filter-select ace-grid__column-filter-mb-8"
-                aria-label={`${column.title} primary operator`}
-              >
-                {getOperatorOptions(column).map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
+                ariaLabel={`${column.title} primary operator`}
+                options={getOperatorOptions(column)}
+              />
 
               {renderConditionInput(condition1, setCondition1)}
 
@@ -1389,38 +1382,34 @@ export const ColumnFilter: React.FC<ColumnFilterProps> = memo(
 
               {condition2Enabled && (
                 <div className="ace-grid__column-filter-mt-10">
-                  <select
+                  <ThemedSelect
                     value={join}
-                    onChange={(e) => setJoin(e.target.value as FilterJoin)}
+                    onChange={(value) => setJoin(value as FilterJoin)}
                     className="ace-grid__column-filter-select ace-grid__column-filter-mb-8"
-                    aria-label={`${column.title} condition join`}
-                  >
-                    <option value="and">AND</option>
-                    <option value="or">OR</option>
-                  </select>
+                    ariaLabel={`${column.title} condition join`}
+                    options={[
+                      { value: "and", label: "AND" },
+                      { value: "or", label: "OR" },
+                    ]}
+                  />
 
-                  <select
+                  <ThemedSelect
                     value={condition2.operator}
-                    onChange={(e) =>
+                    onChange={(value) =>
                       setCondition2({
                         ...condition2,
-                        operator: e.target.value as FilterOperator,
+                        operator: value as FilterOperator,
                         value:
-                          e.target.value === "between" &&
+                          value === "between" &&
                           !Array.isArray(condition2.value)
                             ? ["", ""]
                             : condition2.value,
                       })
                     }
                     className="ace-grid__column-filter-select ace-grid__column-filter-mb-8"
-                    aria-label={`${column.title} secondary operator`}
-                  >
-                    {getOperatorOptions(column).map((option) => (
-                      <option key={option.value} value={option.value}>
-                        {option.label}
-                      </option>
-                    ))}
-                  </select>
+                    ariaLabel={`${column.title} secondary operator`}
+                    options={getOperatorOptions(column)}
+                  />
 
                   {renderConditionInput(condition2, setCondition2)}
                 </div>
@@ -1438,15 +1427,16 @@ export const ColumnFilter: React.FC<ColumnFilterProps> = memo(
               </label>
               {advancedBlocks.length > 1 && (
                 <div className="ace-grid__column-filter-mb-8">
-                  <select
+                  <ThemedSelect
                     value={blockJoin}
-                    onChange={(e) => setBlockJoin(e.target.value as FilterJoin)}
+                    onChange={(value) => setBlockJoin(value as FilterJoin)}
                     className="ace-grid__column-filter-select"
-                    aria-label={`${column.title} block join`}
-                  >
-                    <option value="and">Combine blocks with AND</option>
-                    <option value="or">Combine blocks with OR</option>
-                  </select>
+                    ariaLabel={`${column.title} block join`}
+                    options={[
+                      { value: "and", label: "Combine blocks with AND" },
+                      { value: "or", label: "Combine blocks with OR" },
+                    ]}
+                  />
                 </div>
               )}
 

@@ -6,6 +6,7 @@ import type {
 } from "../../../types";
 import type { GridThemeTokens } from "../../theming/types";
 import { cx } from "../../../utils/cx";
+import { ThemedSelect } from "../../../components/ThemedSelect";
 
 type PaginationBarProps = {
   state: GridPaginationRenderState;
@@ -93,17 +94,6 @@ export const PaginationBar: React.FC<PaginationBarProps> = ({
     lineHeight: 1.2,
   };
 
-  const caretStyle: CSSProperties = {
-    position: "absolute",
-    right: 7,
-    top: "50%",
-    transform: "translateY(-50%)",
-    pointerEvents: "none",
-    color: tokens.textMuted,
-    width: 14,
-    height: 14,
-  };
-
   const controlsStyle: CSSProperties = {
     display: "inline-flex",
     alignItems: "center",
@@ -173,39 +163,18 @@ export const PaginationBar: React.FC<PaginationBarProps> = ({
             style={{ position: "relative", display: "inline-flex" }}
             className="ace-grid__pagination-select-wrap"
           >
-            <select
-              aria-label={labelPageSize}
-              value={state.pageSize}
-              onChange={(e) => state.setPageSize(parseInt(e.target.value, 10))}
+            <ThemedSelect
+              ariaLabel={labelPageSize}
+              value={String(state.pageSize)}
+              onChange={(value) => state.setPageSize(parseInt(value, 10))}
               className="ace-grid__pagination-select"
               style={selectStyle}
               disabled={effectiveDisabled}
-            >
-              {state.pageSizeOptions.map((size) => (
-                <option key={size} value={size}>
-                  {fmt(size)}
-                </option>
-              ))}
-            </select>
-            <span
-              style={caretStyle}
-              className="ace-grid__pagination-caret"
-            >
-              <svg
-                viewBox="0 0 16 16"
-                width="1em"
-                height="1em"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-                focusable="false"
-              >
-                <path d="M5 6.5 8 9.5l3-3" />
-              </svg>
-            </span>
+              options={state.pageSizeOptions.map((size) => ({
+                value: String(size),
+                label: fmt(size),
+              }))}
+            />
           </span>
         </label>
       )}

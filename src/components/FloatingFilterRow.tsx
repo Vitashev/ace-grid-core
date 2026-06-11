@@ -12,6 +12,7 @@ import { useGridTheme } from "../features/theming";
 import { isSystemCol } from "../features/cell-selection";
 import { OffsetCell } from "../features/virtual/components/OffsetCell";
 import { cx } from "../utils/cx";
+import { ThemedSelect } from "./ThemedSelect";
 
 type FloatingFilterRowProps = {
   pinnedLeftColumns: GridColumn[];
@@ -328,18 +329,21 @@ const FloatingFilterCell: React.FC<{
         aria-rowindex={ariaRowIndex}
         aria-colindex={ariaColIndex}
       >
-        <select
+        <ThemedSelect
           className="ace-grid__floating-filter-input ace-grid__floating-filter-select"
           value={inputValue}
-          onChange={(e) => scheduleApply(e.target.value)}
+          onChange={scheduleApply}
           style={sharedInputStyle}
-          aria-label={`Filter ${column.title}`}
-        >
-          <option value="">Any</option>
-          <option value="true">TRUE</option>
-          <option value="false">FALSE</option>
-          {hasBlanks && <option value={BLANKS_TOKEN}>(Blanks)</option>}
-        </select>
+          ariaLabel={`Filter ${column.title}`}
+          options={[
+            { value: "", label: "Any" },
+            { value: "true", label: "TRUE" },
+            { value: "false", label: "FALSE" },
+            ...(hasBlanks
+              ? [{ value: BLANKS_TOKEN, label: "(Blanks)" }]
+              : []),
+          ]}
+        />
       </div>
     );
   }
@@ -353,23 +357,23 @@ const FloatingFilterCell: React.FC<{
         aria-rowindex={ariaRowIndex}
         aria-colindex={ariaColIndex}
       >
-        <select
+        <ThemedSelect
           className="ace-grid__floating-filter-input ace-grid__floating-filter-select"
           value={inputValue}
-          onChange={(e) => scheduleApply(e.target.value)}
+          onChange={scheduleApply}
           style={sharedInputStyle}
-          aria-label={`Filter ${column.title}`}
-        >
-          <option value="">Any</option>
-          {hasBlanks && <option value={BLANKS_TOKEN}>(Blanks)</option>}
-          {choices.map((choice, idx) => {
-            return (
-              <option key={`${choice.key}-${idx}`} value={choice.key}>
-                {choice.label}
-              </option>
-            );
-          })}
-        </select>
+          ariaLabel={`Filter ${column.title}`}
+          options={[
+            { value: "", label: "Any" },
+            ...(hasBlanks
+              ? [{ value: BLANKS_TOKEN, label: "(Blanks)" }]
+              : []),
+            ...choices.map((choice) => ({
+              value: choice.key,
+              label: choice.label,
+            })),
+          ]}
+        />
       </div>
     );
   }

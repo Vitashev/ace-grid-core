@@ -12,6 +12,8 @@ import type { GridColumn, GridRow, GridValidationSeverity } from "../../../types
 import { coerceInputValue } from "../../cell-format";
 import { useGridTheme } from "../../theming";
 import { cx } from "../../../utils/cx";
+import { updateValidationTooltipPlacement } from "../../../components/validationTooltipPlacement";
+import { ThemedSelect } from "../../../components/ThemedSelect";
 
 const DATE_ONLY_LENGTH = 10;
 const DATETIME_LENGTH = 16;
@@ -493,7 +495,7 @@ export const CellEditor: React.FC<CellEditorProps> = memo(
       typeof internalValue === "string" && internalValue.trim().startsWith("=");
     const editorKind: EditorKind = isFormulaInput ? "input" : baseEditorKind;
     const inputRef = useRef<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      HTMLButtonElement | HTMLInputElement | HTMLTextAreaElement
     >(null);
     const skipBlurCommitRef = useRef(false);
     const radioGroupName = useMemo(
@@ -518,6 +520,16 @@ export const CellEditor: React.FC<CellEditorProps> = memo(
       () => ({
         "data-validation-message": validationMessage,
         "data-validation-severity": validationSeverity,
+        onMouseEnter: (event: React.MouseEvent<HTMLElement>) =>
+          updateValidationTooltipPlacement(
+            event.currentTarget,
+            validationMessage,
+          ),
+        onFocusCapture: (event: React.FocusEvent<HTMLElement>) =>
+          updateValidationTooltipPlacement(
+            event.currentTarget,
+            validationMessage,
+          ),
         title: validationMessage,
         "aria-invalid": validationSeverity ? true : undefined,
       }),
@@ -761,13 +773,12 @@ export const CellEditor: React.FC<CellEditorProps> = memo(
           onMouseDown={(event) => event.stopPropagation()}
           {...validationAttributes}
         >
-          <select
+          <ThemedSelect
             className="ace-grid__cell-editor-select"
-            ref={inputRef as React.RefObject<HTMLSelectElement>}
+            ref={inputRef as React.RefObject<HTMLButtonElement>}
             value={internalValue as string}
-            aria-label={inputAriaLabel}
-            onChange={(event) => {
-              const nextValue = event.target.value;
+            ariaLabel={inputAriaLabel}
+            onChange={(nextValue) => {
               const match = fallback.find((option) => option.value === nextValue);
               setInternalIfChanged(nextValue);
               const raw = match ? match.raw : nextValue;
@@ -776,13 +787,11 @@ export const CellEditor: React.FC<CellEditorProps> = memo(
             }}
             onBlur={handleBlur}
             onKeyDown={handleKeyDown}
-          >
-            {fallback.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+            options={fallback.map((option) => ({
+              value: option.value,
+              label: option.label,
+            }))}
+          />
         </div>
       );
     }

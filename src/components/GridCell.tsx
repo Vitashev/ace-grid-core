@@ -27,6 +27,7 @@ import {
 } from "../features/search";
 import type { GridValidationDisplayConfig } from "./publicCoreSupport";
 import { buildGridBodyCellId } from "../features/interaction/utils";
+import { updateValidationTooltipPlacement } from "./validationTooltipPlacement";
 import { renderLoadingCellContent } from "./loadingCellRenderer";
 import { cx } from "../utils/cx";
 
@@ -365,12 +366,19 @@ export const GridCell = memo<GridCellProps>(
         style={themedStyle}
         onMouseDown={onMouseDown}
         onMouseEnter={(e) => {
+          updateValidationTooltipPlacement(e.currentTarget, validationMessage);
           onMouseEnter?.(e);
         }}
         onMouseLeave={(e) => {
           onMouseLeave?.(e);
         }}
         onMouseUp={onMouseUp}
+        onFocusCapture={(event) =>
+          updateValidationTooltipPlacement(
+            event.currentTarget,
+            validationMessage,
+          )
+        }
         onContextMenu={onContextMenu}
         onClick={onClick}
         onDoubleClick={() => onDoubleClick(cellRef.current || undefined)}

@@ -28,6 +28,7 @@ import {
 } from "../../search";
 import type { GridValidationDisplayConfig } from "../../validation/utils";
 import { buildGridBodyCellId } from "../../interaction/utils";
+import { updateValidationTooltipPlacement } from "../../../components/validationTooltipPlacement";
 import { renderLoadingCellContent } from "../../../components/loadingCellRenderer";
 import { cx } from "../../../utils/cx";
 
@@ -402,9 +403,16 @@ export const VirtualizedGridCell = memo<VirtualizedGridCellProps>(
         style={themedStyle}
         onMouseDown={onMouseDown}
         onMouseEnter={(e) => {
+          updateValidationTooltipPlacement(e.currentTarget, validationMessage);
           onMouseEnter?.(e);
         }}
         onMouseUp={onMouseUp}
+        onFocusCapture={(event) =>
+          updateValidationTooltipPlacement(
+            event.currentTarget,
+            validationMessage,
+          )
+        }
         onContextMenu={onContextMenu}
         onClick={onClick}
         onDoubleClick={() => onDoubleClick(virtualRef.current || undefined)}

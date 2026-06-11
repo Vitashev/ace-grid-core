@@ -64,6 +64,365 @@ export const GRID_BASE_CSS = `
   overscroll-behavior: contain;
   overflow-anchor: none;
 }
+
+/*
+ * Normalize browser-native controls so grid UI has the same geometry and
+ * interaction styling on macOS, Windows, and Linux. Theme tokens still own
+ * the colors, radii, and surfaces.
+ */
+.ace-grid,
+.ace-grid__column-filter,
+.ace-grid__chart-panel,
+.ace-grid__json-editor,
+.ace-grid__pagination,
+.ace-grid__formula-bar {
+  color-scheme: light;
+}
+
+[data-ace-grid-theme="classic-dark"] :where(
+  .ace-grid,
+  .ace-grid__column-filter,
+  .ace-grid__chart-panel,
+  .ace-grid__json-editor,
+  .ace-grid__pagination,
+  .ace-grid__formula-bar
+),
+[data-ace-grid-theme="data-dark"] :where(
+  .ace-grid,
+  .ace-grid__column-filter,
+  .ace-grid__chart-panel,
+  .ace-grid__json-editor,
+  .ace-grid__pagination,
+  .ace-grid__formula-bar
+),
+[data-ace-grid-theme="material-3-dark"] :where(
+  .ace-grid,
+  .ace-grid__column-filter,
+  .ace-grid__chart-panel,
+  .ace-grid__json-editor,
+  .ace-grid__pagination,
+  .ace-grid__formula-bar
+),
+[data-ace-grid-theme="liquid-glass-dark"] :where(
+  .ace-grid,
+  .ace-grid__column-filter,
+  .ace-grid__chart-panel,
+  .ace-grid__json-editor,
+  .ace-grid__pagination,
+  .ace-grid__formula-bar
+) {
+  color-scheme: dark;
+}
+
+.ace-grid :where(button, input, select, textarea),
+.ace-grid__column-filter :where(button, input, select, textarea),
+.ace-grid__chart-panel :where(button, input, select, textarea),
+.ace-grid__json-editor :where(button, input, select, textarea),
+.ace-grid__pagination :where(button, input, select, textarea),
+.ace-grid__formula-bar :where(button, input, select, textarea) {
+  font: inherit;
+}
+
+.ace-grid :where(button, select),
+.ace-grid__column-filter :where(button, select),
+.ace-grid__chart-panel :where(button, select),
+.ace-grid__json-editor :where(button, select),
+.ace-grid__pagination :where(button, select),
+.ace-grid__formula-bar :where(button, select) {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.ace-grid :where(select),
+.ace-grid__column-filter :where(select),
+.ace-grid__chart-panel :where(select),
+.ace-grid__json-editor :where(select) {
+  padding-right: 30px !important;
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%) !important;
+  background-position:
+    calc(100% - 14px) calc(50% - 1px),
+    calc(100% - 9px) calc(50% - 1px) !important;
+  background-repeat: no-repeat !important;
+  background-size: 5px 5px, 5px 5px;
+  cursor: pointer;
+}
+
+.ace-grid :where(select:disabled),
+.ace-grid__column-filter :where(select:disabled),
+.ace-grid__chart-panel :where(select:disabled),
+.ace-grid__json-editor :where(select:disabled) {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.ace-grid :where(input[type="checkbox"], input[type="radio"]),
+.ace-grid__column-filter :where(input[type="checkbox"], input[type="radio"]),
+.ace-grid__chart-panel :where(input[type="checkbox"], input[type="radio"]),
+.ace-grid__json-editor :where(input[type="checkbox"], input[type="radio"]) {
+  -webkit-appearance: none;
+  appearance: none;
+  position: relative;
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1px solid var(--ace-grid-border-color-strong, rgba(100, 116, 139, 0.72));
+  background: var(--ace-grid-surface-raised, #fff);
+  box-shadow: inset 0 1px 1px rgba(15, 23, 42, 0.06);
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    background-color 0.14s ease,
+    border-color 0.14s ease,
+    box-shadow 0.14s ease,
+    opacity 0.14s ease;
+}
+
+.ace-grid :where(input[type="checkbox"]),
+.ace-grid__column-filter :where(input[type="checkbox"]),
+.ace-grid__chart-panel :where(input[type="checkbox"]),
+.ace-grid__json-editor :where(input[type="checkbox"]) {
+  border-radius: max(3px, calc(var(--ace-grid-border-radius-sm, 6px) * 0.65));
+}
+
+.ace-grid :where(input[type="radio"]),
+.ace-grid__column-filter :where(input[type="radio"]),
+.ace-grid__chart-panel :where(input[type="radio"]),
+.ace-grid__json-editor :where(input[type="radio"]) {
+  border-radius: 50%;
+}
+
+.ace-grid :where(input[type="checkbox"]:hover, input[type="radio"]:hover),
+.ace-grid__column-filter :where(input[type="checkbox"]:hover, input[type="radio"]:hover),
+.ace-grid__chart-panel :where(input[type="checkbox"]:hover, input[type="radio"]:hover),
+.ace-grid__json-editor :where(input[type="checkbox"]:hover, input[type="radio"]:hover) {
+  border-color: var(--ace-grid-checkbox-accent, #2563eb);
+}
+
+.ace-grid :where(input[type="checkbox"]:focus-visible, input[type="radio"]:focus-visible),
+.ace-grid__column-filter :where(input[type="checkbox"]:focus-visible, input[type="radio"]:focus-visible),
+.ace-grid__chart-panel :where(input[type="checkbox"]:focus-visible, input[type="radio"]:focus-visible),
+.ace-grid__json-editor :where(input[type="checkbox"]:focus-visible, input[type="radio"]:focus-visible) {
+  outline: none;
+  box-shadow:
+    0 0 0 var(--ace-grid-focus-outline-width, 2px)
+      color-mix(in srgb, var(--ace-grid-focus-outline, #2563eb) 28%, transparent),
+    inset 0 1px 1px rgba(15, 23, 42, 0.06);
+}
+
+.ace-grid :where(input[type="checkbox"]:checked, input[type="checkbox"]:indeterminate, input[type="radio"]:checked),
+.ace-grid__column-filter :where(input[type="checkbox"]:checked, input[type="checkbox"]:indeterminate, input[type="radio"]:checked),
+.ace-grid__chart-panel :where(input[type="checkbox"]:checked, input[type="checkbox"]:indeterminate, input[type="radio"]:checked),
+.ace-grid__json-editor :where(input[type="checkbox"]:checked, input[type="checkbox"]:indeterminate, input[type="radio"]:checked) {
+  border-color: var(--ace-grid-checkbox-accent, #2563eb);
+  background: var(--ace-grid-checkbox-accent, #2563eb);
+}
+
+.ace-grid :where(input[type="checkbox"]:checked)::after,
+.ace-grid__column-filter :where(input[type="checkbox"]:checked)::after,
+.ace-grid__chart-panel :where(input[type="checkbox"]:checked)::after,
+.ace-grid__json-editor :where(input[type="checkbox"]:checked)::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--ace-grid-text-on-accent, #fff);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  box-sizing: border-box;
+}
+
+.ace-grid :where(input[type="checkbox"]:indeterminate)::after,
+.ace-grid__column-filter :where(input[type="checkbox"]:indeterminate)::after,
+.ace-grid__chart-panel :where(input[type="checkbox"]:indeterminate)::after,
+.ace-grid__json-editor :where(input[type="checkbox"]:indeterminate)::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  top: 6px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--ace-grid-text-on-accent, #fff);
+}
+
+.ace-grid :where(input[type="radio"]:checked)::after,
+.ace-grid__column-filter :where(input[type="radio"]:checked)::after,
+.ace-grid__chart-panel :where(input[type="radio"]:checked)::after,
+.ace-grid__json-editor :where(input[type="radio"]:checked)::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: var(--ace-grid-text-on-accent, #fff);
+}
+
+.ace-grid :where(input[type="checkbox"]:disabled, input[type="radio"]:disabled),
+.ace-grid__column-filter :where(input[type="checkbox"]:disabled, input[type="radio"]:disabled),
+.ace-grid__chart-panel :where(input[type="checkbox"]:disabled, input[type="radio"]:disabled),
+.ace-grid__json-editor :where(input[type="checkbox"]:disabled, input[type="radio"]:disabled) {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+
+.ace-grid :where(input[type="number"]),
+.ace-grid__column-filter :where(input[type="number"]),
+.ace-grid__chart-panel :where(input[type="number"]),
+.ace-grid__json-editor :where(input[type="number"]) {
+  -moz-appearance: textfield;
+}
+
+.ace-grid :where(input[type="number"])::-webkit-inner-spin-button,
+.ace-grid :where(input[type="number"])::-webkit-outer-spin-button,
+.ace-grid__column-filter :where(input[type="number"])::-webkit-inner-spin-button,
+.ace-grid__column-filter :where(input[type="number"])::-webkit-outer-spin-button,
+.ace-grid__chart-panel :where(input[type="number"])::-webkit-inner-spin-button,
+.ace-grid__chart-panel :where(input[type="number"])::-webkit-outer-spin-button,
+.ace-grid__json-editor :where(input[type="number"])::-webkit-inner-spin-button,
+.ace-grid__json-editor :where(input[type="number"])::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.ace-grid :where(input[type="search"])::-webkit-search-decoration,
+.ace-grid :where(input[type="search"])::-webkit-search-cancel-button,
+.ace-grid :where(input[type="search"])::-webkit-search-results-button,
+.ace-grid :where(input[type="search"])::-webkit-search-results-decoration,
+.ace-grid__column-filter :where(input[type="search"])::-webkit-search-decoration,
+.ace-grid__column-filter :where(input[type="search"])::-webkit-search-cancel-button,
+.ace-grid__column-filter :where(input[type="search"])::-webkit-search-results-button,
+.ace-grid__column-filter :where(input[type="search"])::-webkit-search-results-decoration {
+  -webkit-appearance: none;
+}
+
+.ace-grid :where(input[type="date"], input[type="time"], input[type="datetime-local"]) {
+  min-width: 0;
+  padding-right: 30px !important;
+  background-repeat: no-repeat !important;
+  background-position: right 8px center !important;
+  background-size: 15px 15px !important;
+}
+
+.ace-grid :where(input[type="date"], input[type="datetime-local"]) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='5' width='18' height='16' rx='2'/%3E%3Cpath d='M16 3v4M8 3v4M3 11h18'/%3E%3C/svg%3E") !important;
+}
+
+.ace-grid :where(input[type="time"]) {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 7v5l3 2'/%3E%3C/svg%3E") !important;
+}
+
+.ace-grid :where(input[type="date"], input[type="time"], input[type="datetime-local"])::-webkit-calendar-picker-indicator {
+  width: 18px;
+  height: 18px;
+  margin: 0 -24px 0 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.ace-grid :where(input[type="color"]),
+.ace-grid__column-filter :where(input[type="color"]),
+.ace-grid__chart-panel :where(input[type="color"]) {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 32px;
+  min-width: 32px;
+  height: 28px;
+  padding: 3px;
+  border: 1px solid var(--ace-grid-border-color, rgba(148, 163, 184, 0.45));
+  border-radius: var(--ace-grid-border-radius-sm, 6px);
+  background: var(--ace-grid-surface-raised, #fff);
+  cursor: pointer;
+}
+
+.ace-grid :where(input[type="color"])::-webkit-color-swatch-wrapper,
+.ace-grid__column-filter :where(input[type="color"])::-webkit-color-swatch-wrapper,
+.ace-grid__chart-panel :where(input[type="color"])::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.ace-grid :where(input[type="color"])::-webkit-color-swatch,
+.ace-grid__column-filter :where(input[type="color"])::-webkit-color-swatch,
+.ace-grid__chart-panel :where(input[type="color"])::-webkit-color-swatch {
+  border: 0;
+  border-radius: max(2px, calc(var(--ace-grid-border-radius-sm, 6px) * 0.55));
+}
+
+.ace-grid,
+.ace-grid *,
+.ace-grid__column-filter,
+.ace-grid__column-filter *,
+.ace-grid__chart-panel,
+.ace-grid__chart-panel *,
+.ace-grid__json-editor,
+.ace-grid__json-editor * {
+  scrollbar-width: thin;
+  scrollbar-color:
+    var(--ace-grid-scrollbar-thumb, rgba(100, 116, 139, 0.42))
+    var(--ace-grid-scrollbar-track, rgba(148, 163, 184, 0.16));
+}
+
+.ace-grid::-webkit-scrollbar,
+.ace-grid *::-webkit-scrollbar,
+.ace-grid__column-filter::-webkit-scrollbar,
+.ace-grid__column-filter *::-webkit-scrollbar,
+.ace-grid__chart-panel::-webkit-scrollbar,
+.ace-grid__chart-panel *::-webkit-scrollbar,
+.ace-grid__json-editor::-webkit-scrollbar,
+.ace-grid__json-editor *::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.ace-grid::-webkit-scrollbar-track,
+.ace-grid *::-webkit-scrollbar-track,
+.ace-grid__column-filter::-webkit-scrollbar-track,
+.ace-grid__column-filter *::-webkit-scrollbar-track,
+.ace-grid__chart-panel::-webkit-scrollbar-track,
+.ace-grid__chart-panel *::-webkit-scrollbar-track,
+.ace-grid__json-editor::-webkit-scrollbar-track,
+.ace-grid__json-editor *::-webkit-scrollbar-track,
+.ace-grid::-webkit-scrollbar-corner,
+.ace-grid *::-webkit-scrollbar-corner,
+.ace-grid__column-filter::-webkit-scrollbar-corner,
+.ace-grid__column-filter *::-webkit-scrollbar-corner,
+.ace-grid__chart-panel::-webkit-scrollbar-corner,
+.ace-grid__chart-panel *::-webkit-scrollbar-corner,
+.ace-grid__json-editor::-webkit-scrollbar-corner,
+.ace-grid__json-editor *::-webkit-scrollbar-corner {
+  background: var(--ace-grid-scrollbar-track, rgba(148, 163, 184, 0.16));
+}
+
+.ace-grid::-webkit-scrollbar-thumb,
+.ace-grid *::-webkit-scrollbar-thumb,
+.ace-grid__column-filter::-webkit-scrollbar-thumb,
+.ace-grid__column-filter *::-webkit-scrollbar-thumb,
+.ace-grid__chart-panel::-webkit-scrollbar-thumb,
+.ace-grid__chart-panel *::-webkit-scrollbar-thumb,
+.ace-grid__json-editor::-webkit-scrollbar-thumb,
+.ace-grid__json-editor *::-webkit-scrollbar-thumb {
+  min-width: 28px;
+  min-height: 28px;
+  border: 2px solid var(--ace-grid-scrollbar-track, rgba(148, 163, 184, 0.16));
+  border-radius: 999px;
+  background: var(--ace-grid-scrollbar-thumb, rgba(100, 116, 139, 0.42));
+  background-clip: padding-box;
+}
+
+.ace-grid::-webkit-scrollbar-thumb:hover,
+.ace-grid *::-webkit-scrollbar-thumb:hover,
+.ace-grid__column-filter::-webkit-scrollbar-thumb:hover,
+.ace-grid__column-filter *::-webkit-scrollbar-thumb:hover,
+.ace-grid__chart-panel::-webkit-scrollbar-thumb:hover,
+.ace-grid__chart-panel *::-webkit-scrollbar-thumb:hover,
+.ace-grid__json-editor::-webkit-scrollbar-thumb:hover,
+.ace-grid__json-editor *::-webkit-scrollbar-thumb:hover {
+  background: var(--ace-grid-scrollbar-thumb-hover, rgba(100, 116, 139, 0.62));
+  background-clip: padding-box;
+}
 .ace-grid__global-loading-indicator {
   position: absolute;
   top: calc(var(--ace-grid-header-total-height, 0px) + 8px);
@@ -73,6 +432,112 @@ export const GRID_BASE_CSS = `
   opacity: 0;
   transform: translateY(-2px);
   transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.ace-grid__themed-select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 0;
+  text-align: left;
+  cursor: pointer;
+}
+[data-ace-grid-theme] .ace-grid__themed-select.ace-grid__themed-select,
+[data-ace-grid-theme] .ace-grid__column-filter .ace-grid__themed-select.ace-grid__themed-select,
+[data-ace-grid-theme] .ace-grid__chart-panel .ace-grid__themed-select.ace-grid__themed-select {
+  background-image: none !important;
+  background-repeat: initial !important;
+  background-position: initial !important;
+  background-size: initial !important;
+  padding-right: 9px !important;
+}
+.ace-grid__themed-select:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+.ace-grid__themed-select-value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ace-grid__themed-select-caret {
+  flex: 0 0 auto;
+  margin-left: auto;
+  width: 14px;
+  height: 14px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.72;
+}
+.ace-grid__themed-select-popup {
+  position: fixed;
+  z-index: 10000;
+  overflow: auto;
+  padding: 4px;
+  box-sizing: border-box;
+  border: 1px solid var(--ace-grid-select-popup-border);
+  border-radius: var(--ace-grid-select-popup-radius);
+  background: var(--ace-grid-select-popup-bg);
+  color: var(--ace-grid-select-popup-text);
+  box-shadow: var(--ace-grid-select-popup-shadow);
+  font-family: var(--ace-grid-select-popup-font);
+  font-size: var(--ace-grid-select-popup-font-size);
+  scrollbar-width: thin;
+  scrollbar-color:
+    color-mix(in srgb, var(--ace-grid-select-popup-muted) 55%, transparent)
+    transparent;
+}
+.ace-grid__themed-select-option {
+  appearance: none;
+  width: 100%;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 6px 9px;
+  border: 0;
+  border-radius: max(3px, calc(var(--ace-grid-select-popup-radius) * 0.75));
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.ace-grid__themed-select-option--active {
+  background: var(--ace-grid-select-popup-hover);
+}
+.ace-grid__themed-select-option--selected {
+  background: var(--ace-grid-select-popup-selected);
+  color: var(--ace-grid-select-popup-text);
+  font-weight: 600;
+}
+.ace-grid__themed-select-option:disabled {
+  color: var(--ace-grid-select-popup-muted);
+  cursor: not-allowed;
+  opacity: 0.52;
+}
+.ace-grid__themed-select-option-label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ace-grid__themed-select-check {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: var(--ace-grid-select-popup-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .ace-grid__global-loading-indicator--visible {
   opacity: 1;
@@ -103,21 +568,6 @@ export const GRID_BASE_CSS = `
   border-radius: 999px;
   background: currentColor;
   opacity: 0.72;
-}
-
-.ace-grid::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-.ace-grid::-webkit-scrollbar-track {
-  background: var(--ace-grid-scrollbar-track, rgba(0,0,0,0.05));
-}
-.ace-grid::-webkit-scrollbar-thumb {
-  background: var(--ace-grid-scrollbar-thumb, rgba(0,0,0,0.25));
-  border-radius: 999px;
-}
-.ace-grid::-webkit-scrollbar-thumb:hover {
-  background: var(--ace-grid-scrollbar-thumb-hover, rgba(0,0,0,0.35));
 }
 
 .ace-grid__header-row {
@@ -764,6 +1214,20 @@ export const GRID_BASE_CSS = `
 .ace-grid__row-group--pinned-bottom .ace-grid__cell-editor[data-validation-message]:focus-within::before {
   top: auto;
   bottom: calc(100% + 8px);
+}
+.ace-grid__cell[data-validation-tooltip-placement="top"]:hover::before,
+.ace-grid__cell[data-validation-tooltip-placement="top"]:focus-within::before,
+.ace-grid__cell-editor[data-validation-tooltip-placement="top"]:hover::before,
+.ace-grid__cell-editor[data-validation-tooltip-placement="top"]:focus-within::before {
+  top: auto !important;
+  bottom: calc(100% + 8px) !important;
+}
+.ace-grid__cell[data-validation-tooltip-placement="bottom"]:hover::before,
+.ace-grid__cell[data-validation-tooltip-placement="bottom"]:focus-within::before,
+.ace-grid__cell-editor[data-validation-tooltip-placement="bottom"]:hover::before,
+.ace-grid__cell-editor[data-validation-tooltip-placement="bottom"]:focus-within::before {
+  top: calc(100% + 8px) !important;
+  bottom: auto !important;
 }
 @keyframes ace-grid-validation-pulse {
   0% {
