@@ -1,9 +1,9 @@
 # @ace-grid/core
 
-Ace Grid Core is the free, MIT-licensed React runtime for Ace Grid. It provides
-the production foundation for app-grade data grids: editing, selection, sorting,
-filtering, pagination, search, pinning, resizing, theming, virtualization, CSV
-I/O, keyed headers, and core schema-aware state helpers.
+Ace Grid Core is the free, MIT-licensed React data grid runtime for Ace Grid. It
+provides the production foundation for app-grade data grids: editing, selection,
+sorting, filtering, pagination, search, pinning, resizing, theming,
+virtualization, CSV I/O, keyed headers, and core schema-aware state helpers.
 
 Use this package when you need the Community/Core grid runtime without paid Pro
 or Enterprise modules.
@@ -12,6 +12,7 @@ or Enterprise modules.
 
 - Product docs: https://ace-grid.com/docs
 - API reference and generated API spec: https://ace-grid.com/api
+- Framework guides: https://ace-grid.com/guides
 - Public Core source export: https://github.com/Vitashev/ace-grid-core
 
 ## Install
