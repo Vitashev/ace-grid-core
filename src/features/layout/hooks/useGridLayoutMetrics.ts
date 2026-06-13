@@ -30,6 +30,8 @@ type UseGridLayoutMetricsParams = {
   infiniteScrollLoadingBottom: boolean;
   effectiveVirtualization: boolean;
   enableHorizontalVirtualization: boolean;
+  rowBufferPx?: number;
+  columnBufferPx?: number;
   serverRowModelEnabled: boolean;
 };
 
@@ -59,6 +61,8 @@ export const useGridLayoutMetrics = ({
   infiniteScrollLoadingBottom,
   effectiveVirtualization,
   enableHorizontalVirtualization,
+  rowBufferPx,
+  columnBufferPx,
   serverRowModelEnabled,
 }: UseGridLayoutMetricsParams) => {
   const pinnedLeftWidth = useMemo(
@@ -152,9 +156,12 @@ export const useGridLayoutMetrics = ({
     return ranges;
   }, [enableCellSpanning, effectiveMergedCells, columns, centerColumns]);
 
-  const verticalOverscanPx = serverRowModelEnabled
-    ? Math.max(rowHeight * 40, height * 2)
-    : Math.max(rowHeight * 16, height);
+  const verticalOverscanPx =
+    rowBufferPx == null
+      ? serverRowModelEnabled
+        ? Math.max(rowHeight * 40, height * 2)
+        : Math.max(rowHeight * 16, height)
+      : Math.max(0, rowBufferPx);
 
   const { virtualCenterGroups, virtualCenterCols } = useVirtualization(
     effectiveVirtualization,
@@ -175,7 +182,8 @@ export const useGridLayoutMetrics = ({
     centerSpanRanges,
     verticalOverscanPx,
     topInlineInfiniteScrollLoaderHeight,
-    isAtVerticalScrollEnd
+    isAtVerticalScrollEnd,
+    columnBufferPx
   );
 
   const pinnedLeftColumnCount = pinnedLeftColumns.length;

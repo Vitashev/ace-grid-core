@@ -239,7 +239,9 @@ const GridImpl: React.FC<InternalGridProps> = ({
   virtual: {
     enableVirtualization = true,
     enableHorizontalVirtualization = true,
-    enableCellContentVirtualization = true,
+    enableCellContentVirtualization = false,
+    rowBufferPx,
+    columnBufferPx,
   } = {},
   formula: { enableFormulaBar: enableFormulaBarProp = true } = {},
   selection: {
@@ -2409,6 +2411,8 @@ const GridImpl: React.FC<InternalGridProps> = ({
     infiniteScrollLoadingBottom: infiniteScrollState.isLoadingBottom,
     effectiveVirtualization,
     enableHorizontalVirtualization,
+    rowBufferPx,
+    columnBufferPx,
     serverRowModelEnabled,
   });
   totalHeightRef.current = totalHeight;

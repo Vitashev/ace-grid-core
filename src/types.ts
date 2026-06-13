@@ -580,7 +580,12 @@ export interface GridKeyedHeadersProps {
 export interface GridVirtualProps {
   enableVirtualization?: boolean;
   enableHorizontalVirtualization?: boolean;
+  /** Defers heavy inner cell content until visible. Disabled by default. */
   enableCellContentVirtualization?: boolean;
+  /** Extra vertical pixels rendered before and after the visible row window. */
+  rowBufferPx?: number;
+  /** Extra horizontal pixels rendered before and after the visible column window. */
+  columnBufferPx?: number;
 }
 
 /** FORMULA BAR */

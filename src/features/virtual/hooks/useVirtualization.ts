@@ -26,7 +26,8 @@ export function useVirtualization(
   spanRanges?: Array<{ start: number; end: number }>,
   verticalOverscanPx?: number,
   verticalLeadingInsetPx?: number,
-  forceAtVerticalEnd?: boolean
+  forceAtVerticalEnd?: boolean,
+  horizontalOverscanPx?: number
 ) {
   const groupHeights = useMemo(
     () => middleRowGroups.map((g) => g.height),
@@ -58,7 +59,10 @@ export function useVirtualization(
 
     // Keep a wider overscan window when requested (e.g. SSRM) to avoid
     // transient blank areas during fast scrolling.
-    const pad = Math.max(3 * rowH, Math.max(0, verticalOverscanPx ?? 0));
+    const pad =
+      verticalOverscanPx == null
+        ? 3 * rowH
+        : Math.max(0, verticalOverscanPx);
     const rowsTotalPx = groupPrefix[middleRowGroups.length] ?? 0;
     const leadingInsetPx = Math.max(0, verticalLeadingInsetPx ?? 0);
     const rowSpaceTop = Math.min(
@@ -139,8 +143,10 @@ export function useVirtualization(
     // available horizontal viewport
     const viewportW = Math.max(0, canvasW - leftPinnedW - rightPinnedW);
 
-    // padding/buffer identical to original logic: 2 * 120
-    const pad = 2 * 120;
+    const pad =
+      horizontalOverscanPx == null
+        ? 2 * 120
+        : Math.max(0, horizontalOverscanPx);
 
     const fromPx = Math.max(0, scLeft - pad);
     const toPx = scLeft + viewportW + pad;
@@ -194,6 +200,7 @@ export function useVirtualization(
     rightPinnedW,
     scLeft,
     spanRanges,
+    horizontalOverscanPx,
   ]);
 
   return { virtualCenterGroups, virtualCenterCols };

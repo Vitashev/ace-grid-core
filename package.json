@@ -1,6 +1,6 @@
 {
   "name": "@ace-grid/core",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Ace Grid Core: free React data grid runtime with editing, selection, theming, filtering, sorting, pagination, virtualization, CSV I/O, and core schema support.",
   "type": "module",
   "module": "./dist/core.js",
