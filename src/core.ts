@@ -52,6 +52,10 @@ export {
   GRID_DEFAULT_CONTEXT_MENU_ITEM_IDS,
 } from "./features/context-menu";
 export { PinningEngine } from "./features/pinning";
+export {
+  createGridRowsFromRecords,
+  type GridRecordRowsOptions,
+} from "./utils/recordRows";
 
 export type * from "./capabilities";
 export type * from "./features/context-menu";
