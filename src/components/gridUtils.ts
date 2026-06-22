@@ -209,6 +209,7 @@ export const EMPTY_ROWS: GridRow[] = [];
 export const EMPTY_COLUMNS: GridColumn[] = [];
 export const EMPTY_MERGED_CELLS: GridMergedCell[] = [];
 export const EMPTY_FILTERS: never[] = [];
+export const EMPTY_ROW_HEIGHTS: Record<string, number> = {};
 export const EMPTY_PINNED_ROWS: {
   top: (string | number)[];
   bottom: (string | number)[];

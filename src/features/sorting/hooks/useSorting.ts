@@ -114,7 +114,8 @@ export function useSorting(
   pinnedRows: { top: (string | number)[]; bottom: (string | number)[] },
   sortModel: GridSortConfig[],
   rowHeightOf?: (rowId: string | number) => number | undefined,
-  rowIdMergeMode: GridSpanRowIdMergeMode = "compact"
+  rowIdMergeMode: GridSpanRowIdMergeMode = "compact",
+  buildGroupByRowId = true
 ) {
   const activeSortModel = useMemo(() => {
     if (!Array.isArray(sortModel) || !sortModel.length) return [];
@@ -217,9 +218,10 @@ export function useSorting(
 
   const groupByRowId = useMemo(() => {
     const m = new Map<string | number, GridRowGroup>();
+    if (!buildGroupByRowId) return m;
     for (const g of rowGroups) for (const r of g.rows) m.set(r.id, g);
     return m;
-  }, [rowGroups]);
+  }, [buildGroupByRowId, rowGroups]);
 
   return {
     grouping,

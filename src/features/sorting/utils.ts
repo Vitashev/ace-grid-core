@@ -7,6 +7,11 @@ import type {
   GridSortConfig,
 } from "../../types";
 
+// Row groups are immutable after construction. Reuse the empty span lookup for
+// the overwhelmingly common one-row/no-merge path instead of allocating one
+// Map per data row.
+const EMPTY_GROUP_SPANS = new Map<string, GridRowGroupSpan[]>();
+
 export class RowGrouping {
   private mergedCells: GridMergedCell[];
   private columns: GridColumn[];
@@ -70,6 +75,18 @@ export class RowGrouping {
    * Each group represents a logical row that may span multiple physical rows
    */
   createRowGroups(rows: GridRow[]): GridRowGroup[] {
+    if (this.mergedCells.length === 0 && !this.rowHeightOf) {
+      return rows.map((row, rowIndex) => ({
+        id: `group-${rowIndex}`,
+        rows: [row],
+        startRowIndex: rowIndex,
+        endRowIndex: rowIndex,
+        height: this.rowHeight,
+        spans: EMPTY_GROUP_SPANS,
+        isParent: false,
+      }));
+    }
+
     const groups: GridRowGroup[] = [];
     const mergedGrid = this.buildMergedCellGrid();
 

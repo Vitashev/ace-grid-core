@@ -122,6 +122,7 @@ import {
   EMPTY_FILTERS,
   EMPTY_MERGED_CELLS,
   EMPTY_PINNED_ROWS,
+  EMPTY_ROW_HEIGHTS,
   EMPTY_ROWS,
   EMPTY_STRING_ARRAY,
   flattenLeafColumns,
@@ -235,7 +236,7 @@ const GridImpl: React.FC<InternalGridProps> = ({
   },
   columnGrouping: columnGroupingProps = {},
   keyedHeaders: keyedHeadersPropRaw = {},
-  rowsConfig: { rowHeights = {} } = {},
+  rowsConfig: { rowHeights = EMPTY_ROW_HEIGHTS } = {},
   virtual: {
     enableVirtualization = true,
     enableHorizontalVirtualization = true,
@@ -274,7 +275,7 @@ const GridImpl: React.FC<InternalGridProps> = ({
   validation: validationPropsRaw = {},
   filter: {
     filterMode: filterModeProp = "client",
-    activeFilters: activeFiltersProp = [],
+    activeFilters: activeFiltersProp = EMPTY_FILTERS,
     onFilter: onFilterProp,
     enableFloatingFilters: enableFloatingFiltersProp = false,
     floatingFilterHeight,
@@ -298,7 +299,7 @@ const GridImpl: React.FC<InternalGridProps> = ({
     isRowPinning: isRowPinningProp = true,
     isColPinning: isColPinningProp = true,
     pinnedColumns: pinnedColumnsProp = { left: [], right: [] },
-    pinnedRows: pinnedRowsProp = { top: [], bottom: [] },
+    pinnedRows: pinnedRowsProp = EMPTY_PINNED_ROWS,
     onPinColumn,
     onPinColumnAtPosition,
     onPinAndPositionColumn,
@@ -482,11 +483,22 @@ const GridImpl: React.FC<InternalGridProps> = ({
     ? keyedHeadersPropRaw
     : { ...keyedHeadersPropRaw, enabled: false };
   const filterMode = filteringCapabilityEnabled ? filterModeProp : "client";
-  const activeFilters = filteringCapabilityEnabled
-    ? advancedFilteringModule.sanitizeFilters(activeFiltersProp, {
+  const activeFilters = useMemo(
+    () => {
+      if (!filteringCapabilityEnabled || activeFiltersProp.length === 0) {
+        return EMPTY_FILTERS;
+      }
+      return advancedFilteringModule.sanitizeFilters(activeFiltersProp, {
         allowAdvanced: advancedFilterCapabilityEnabled,
-      })
-    : [];
+      });
+    },
+    [
+      activeFiltersProp,
+      advancedFilterCapabilityEnabled,
+      advancedFilteringModule,
+      filteringCapabilityEnabled,
+    ],
+  );
   const onFilter = filteringCapabilityEnabled ? onFilterProp : undefined;
   const enableFloatingFilters =
     floatingFilterCapabilityEnabled && enableFloatingFiltersProp;
@@ -1872,9 +1884,25 @@ const GridImpl: React.FC<InternalGridProps> = ({
   const onScroll = useCallback(
     (e: React.UIEvent<HTMLDivElement>) => {
       pendingScrollElementRef.current = e.currentTarget;
-      scheduleScrollWork();
+      // Scroll events are already aligned with the browser's rendering cadence.
+      // Commit the viewport immediately so React can render the next virtual
+      // window before the upcoming paint instead of one frame later.
+      commitScrollFromElement(e.currentTarget);
+
+      if (
+        (serverRowModelEnabled && !ssrmPaginationActive) ||
+        effectiveInfiniteScroll
+      ) {
+        scheduleScrollWork();
+      }
     },
-    [scheduleScrollWork],
+    [
+      commitScrollFromElement,
+      effectiveInfiniteScroll,
+      scheduleScrollWork,
+      serverRowModelEnabled,
+      ssrmPaginationActive,
+    ],
   );
 
   useEffect(() => {
@@ -2078,8 +2106,9 @@ const GridImpl: React.FC<InternalGridProps> = ({
     clientFilters,
     sortingPinnedRows,
     clientSortModel,
-    rowHeightOf,
+    hasCustomRowHeights ? rowHeightOf : undefined,
     resolvedRowIdMergeMode,
+    effectiveRowReorder,
   );
 
   const serverRowRenderChunkSize = useMemo(() => {
