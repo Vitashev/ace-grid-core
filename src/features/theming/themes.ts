@@ -4951,11 +4951,15 @@ export const liquidGlassTheme: GridTheme = {
     [data-ace-grid-theme="liquid-glass"] .ace-grid__column-filter-checkbox:checked::after,
     [data-ace-grid-theme="liquid-glass"] .ace-grid__cell-editor-checkbox:checked::after {
       content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
       width: 4px;
       height: 8px;
       border-right: 2px solid rgba(248, 251, 255, 0.98);
       border-bottom: 2px solid rgba(248, 251, 255, 0.98);
-      transform: rotate(42deg) translate(-0.5px, -0.5px);
+      transform: translate(-50%, -58%) rotate(42deg);
+      box-sizing: border-box;
     }
     [data-ace-grid-theme="liquid-glass"] .ace-grid input[type="checkbox"]:indeterminate,
     [data-ace-grid-theme="liquid-glass"] .ace-grid__column-filter input[type="checkbox"]:indeterminate,
@@ -4983,10 +4987,15 @@ export const liquidGlassTheme: GridTheme = {
     [data-ace-grid-theme="liquid-glass"] .ace-grid__column-filter-checkbox:indeterminate::after,
     [data-ace-grid-theme="liquid-glass"] .ace-grid__cell-editor-checkbox:indeterminate::after {
       content: "";
+      position: absolute;
+      left: 50%;
+      right: auto;
+      top: 50%;
       width: 8px;
       height: 2px;
       border-radius: 999px;
       background: rgba(248, 251, 255, 0.98);
+      transform: translate(-50%, -50%);
     }
     [data-ace-grid-theme="liquid-glass"] .ace-grid input[type="checkbox"]:focus-visible,
     [data-ace-grid-theme="liquid-glass"] .ace-grid__column-filter input[type="checkbox"]:focus-visible,
