@@ -8,7 +8,7 @@ export default defineConfig({
       entry: "src/core.ts",
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react-dom/client"],
+      external: [/^react(?:\/.*)?$/, /^react-dom(?:\/.*)?$/],
       output: [
         {
           format: "es",
