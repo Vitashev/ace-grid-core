@@ -83,8 +83,8 @@ const coreFeatures = [
   ["theming", "Liquid Glass themes"],
   ["io.csv", "CSV import & export"],
   ["contextMenu.base", "Context menu"],
-  ["reorder.column", "Column drag reorder"],
-  ["reorder.row", "Row drag reorder"],
+  ["reorder.column", "Single-column drag reorder"],
+  ["reorder.row", "Single-row drag reorder"],
   ["schema.core", "Serializable view state"],
   ["pinning", "Rows & columns pinning"],
   ["keyedHeaders", "Spreadsheet headers"],
@@ -153,6 +153,25 @@ export function App() {
   const pinnedCount = countPinned(api.pinnedColumns) + countPinned(api.pinnedRows);
   const search = api.search;
   const filtering = api.filtering;
+  const rowReorderLocked =
+    (api.sortModel?.length ?? 0) > 0 ||
+    (filtering.activeFilters?.length ?? 0) > 0 ||
+    search.query.trim().length > 0;
+
+  const enterManualOrder = () => {
+    api.setSortModel([]);
+    filtering.clearAllFilters();
+    search.set({ query: "" });
+    api.pagination.setPageIndex(0);
+    setActivity("Manual row order enabled — drag a row handle to move it.");
+  };
+
+  const reorderVisibleRow = (fromIndex: number, toIndex: number) => {
+    if (rowReorderLocked) return;
+    const pageOffset = api.pagination.pageIndex * api.pagination.pageSize;
+    api.reorderRows(pageOffset + fromIndex, pageOffset + toIndex);
+    setActivity(`Moved row ${fromIndex + 1} to position ${toIndex + 1}.`);
+  };
 
   const copyViewState = useCallback(async () => {
     const viewState = api.getViewState();
@@ -207,13 +226,12 @@ export function App() {
           <div className="hero__copy">
             <div className="brand-line">
               <span className="brand-mark">A</span>
-              <span>ACE GRID · CORE SHOWCASE</span>
+              <span>ACE GRID · REACT STARTER</span>
               <span className="core-pill">MIT</span>
             </div>
-            <h1>Every Core feature.<br />One liquid workspace.</h1>
+            <h1>Ace Grid React Example</h1>
             <p>
-              A production-shaped React grid with all 20 Core capabilities wired
-              into controls you can try right now.
+              An interactive customer data grid built with @ace-grid/core.
             </p>
           </div>
 
@@ -247,6 +265,9 @@ export function App() {
             <button onClick={() => csvInputRef.current?.click()}>Import CSV</button>
             <button onClick={exportCsv}>Export CSV</button>
             <button onClick={copyViewState}>Copy state</button>
+            <button onClick={enterManualOrder} disabled={!rowReorderLocked}>
+              Manual order
+            </button>
             <button className="theme-toggle" onClick={() => setDarkGlass((value) => !value)}>
               {darkGlass ? "Light glass" : "Dark glass"}
             </button>
@@ -266,7 +287,9 @@ export function App() {
           <div className="grid-stage__topline">
             <div>
               <strong>Revenue operations</strong>
-              <span>Drag headers and rows · resize edges · right-click any cell</span>
+              <span>
+                Drag one row or column at a time · resize edges · right-click any cell
+              </span>
             </div>
             <div className="live-badge"><span /> Live Core runtime</div>
           </div>
@@ -317,7 +340,11 @@ export function App() {
                 onRowSelectionChange: (ids: Array<string | number>) => {
                   api.setSelectedRowIds(ids);
                   api.updateRowsSelection(ids);
-                  setActivity(`${ids.length} row${ids.length === 1 ? "" : "s"} selected.`);
+                  setActivity(
+                    ids.length > 1
+                      ? `${ids.length} rows selected. Core drag moves one row; multi-row drag is available in Pro.`
+                      : `${ids.length} row${ids.length === 1 ? "" : "s"} selected.`,
+                  );
                 },
                 onColumnSelectionChange: api.setSelectedColumnKeys,
               }}
@@ -376,11 +403,14 @@ export function App() {
               }}
               reorder={{
                 isColReorder: true,
-                isRowReorder: true,
-                onColumnReorder: api.reorderColumns,
-                onRowReorder: api.reorderRows,
-                onMultiRowReorder: api.reorderMultipleRows,
-                onMultiColumnReorder: api.reorderMultipleColumns,
+                isRowReorder: !rowReorderLocked,
+                onColumnReorder: (fromIndex: number, toIndex: number) => {
+                  api.reorderColumns(fromIndex, toIndex);
+                  setActivity(
+                    `Moved column ${fromIndex + 1} to position ${toIndex + 1}.`,
+                  );
+                },
+                onRowReorder: reorderVisibleRow,
                 onUpdateColumnOrder: api.updateColumnOrder,
               }}
               resize={{
