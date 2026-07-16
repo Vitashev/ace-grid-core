@@ -14,6 +14,7 @@ or Enterprise modules.
 - API reference and generated API spec: https://ace-grid.com/api
 - Framework guides: https://ace-grid.com/guides
 - Public Core source export: https://github.com/Vitashev/ace-grid-core
+- Interactive React starter: https://stackblitz.com/github/Vitashev/ace-grid-core/tree/main/examples/react-basic?file=src%2FApp.tsx
 
 ## Install
 

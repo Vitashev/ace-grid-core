@@ -3,7 +3,7 @@
 A small, production-shaped Vite + React + TypeScript starter for
 [`@ace-grid/core`](https://www.npmjs.com/package/@ace-grid/core).
 
-[Open in StackBlitz](https://stackblitz.com/github/Vitashev/ace-grid-core/tree/codex/react-stackblitz-starter/examples/react-basic?file=src%2FApp.tsx)
+[Open in StackBlitz](https://stackblitz.com/github/Vitashev/ace-grid-core/tree/main/examples/react-basic?file=src%2FApp.tsx)
 
 ## Run locally
 
