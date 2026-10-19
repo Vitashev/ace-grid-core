@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, type RefObject } from "react";
 
 interface Options {
   edgeSize?: number;
@@ -6,7 +6,7 @@ interface Options {
 }
 
 export function useDnDAutoScroll(
-  containerRef: React.RefObject<HTMLElement>,
+  containerRef: RefObject<HTMLElement>,
   { edgeSize = 36, maxEdgeSpeed = 40 }: Options = {}
 ) {
   const rafIdRef = useRef<number | null>(null);

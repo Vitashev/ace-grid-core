@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@ace-grid/core": [
+        "../../src/core.ts"
+      ]
+    }
+  }
+}

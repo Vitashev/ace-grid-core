@@ -1,9 +1,18 @@
+// Core-only fallback contracts. Ignored inputs are accepted explicitly; concrete
+// return types keep the shared renderer checked without importing paid modules.
 import React, { useCallback, useEffect, useMemo, useRef } from "react";
 import type {
   GridColumn,
-  GridMergedCell,
   GridRow,
   GridRowGroupSpan,
+  GridRowGroup,
+  GridSparklineProps,
+  GridSparklineOptions,
+  GridServerRowModelProps,
+  GridServerRowGroupColumnRequest,
+  GridServerRowModelPivotValueColumnRequest,
+  GridServerRowModelApi,
+  GridServerRowModelTransactionResult,
   GridValidationIndicator,
 } from "../types";
 
@@ -58,28 +67,28 @@ export interface SpanCoverage {
 
 export const spanCellKey = (row: number, col: number) => `${row}:${col}`;
 
-export const buildSpanCoverage = (): SpanCoverage => ({
+export const buildSpanCoverage = (..._args: unknown[]): SpanCoverage => ({
   spanStartLookup: new Map(),
   coveredCells: new Set(),
 });
 
-export const useFormulaRangePick = () => ({
-  handleGridPointerDownCapture: () => undefined,
+export const useFormulaRangePick = (..._args: unknown[]) => ({
+  handleGridPointerDownCapture: (..._args: unknown[]) => undefined,
 });
 
-export const buildRowGroupingModel = ({ rows }: { rows: GridRow[] }): RowGroupingModel => ({
+export const buildRowGroupingModel = ({ rows }: { rows: GridRow[]; [key: string]: unknown }): RowGroupingModel => ({
   rows: rows.slice(),
   groupPaths: [],
   nodes: new Map(),
 });
 
-export const buildTreeDataModel = ({ rows }: { rows: GridRow[] }) => ({
+export const buildTreeDataModel = ({ rows }: { rows: GridRow[]; [key: string]: unknown }) => ({
   rows: rows.slice(),
   groupPaths: [],
 });
 
-export const exportGridToExcel = async () => undefined;
-export const importGridFromExcel = async ({ columns }: { columns: GridColumn[] }) => ({
+export const exportGridToExcel = async (..._args: unknown[]) => undefined;
+export const importGridFromExcel = async ({ columns }: { columns: GridColumn[]; [key: string]: unknown }) => ({
   columns: columns.slice(),
   rows: [],
   mergedCells: [],
@@ -99,25 +108,27 @@ export const buildClientPivotDataset = ({
 }: {
   rows: GridRow[];
   columns: GridColumn[];
+  [key: string]: unknown;
 }) => ({
   columns: columns.slice(),
   rows: rows.slice(),
-  pivotResultFields: [],
+  pivotResultFields: [] as string[],
 });
 
 export const buildPivotColumnsFromFields = ({
   sourceColumns,
 }: {
   sourceColumns: GridColumn[];
+  [key: string]: unknown;
 }) => sourceColumns.slice();
 
-export const IntegratedChartPanel = () => null;
+export const IntegratedChartPanel: React.FC<{ model: unknown }> = () => null;
 export const useGridChartsController = (params: any) => ({
   chartControls: params.chartsConfig?.controls,
   settingsPanelEnabled: false,
   defaultChartSettings: {},
   chartSettings: {},
-  chartModel: null,
+  chartModel: null as { model: unknown } | null,
   chartTypes: params.chartsConfig?.chartTypes?.slice?.() ?? [],
   chartSeriesBy: params.chartsConfig?.seriesBy ?? "columns",
   seriesByOptions: ["columns", "rows"],
@@ -129,39 +140,39 @@ export const useGridChartsController = (params: any) => ({
   createChartMenuPosition: params.chartsConfig?.createChartMenu?.position ?? "top",
   disabledChartTypes: new Set(),
   disabledSeriesBy: new Set(),
-  handleChartTypeChange: () => undefined,
-  handleSeriesByChange: () => undefined,
-  handleGroupByChange: () => undefined,
-  handleChartSettingsChange: () => undefined,
-  closeChart: () => undefined,
+  handleChartTypeChange: (..._args: unknown[]) => undefined,
+  handleSeriesByChange: (..._args: unknown[]) => undefined,
+  handleGroupByChange: (..._args: unknown[]) => undefined,
+  handleChartSettingsChange: (..._args: unknown[]) => undefined,
+  closeChart: (..._args: unknown[]) => undefined,
 });
 
-export const useSpan = () => ({
+export const useSpan = (..._args: unknown[]) => ({
   columnsWithAnySpan: new Set<string>(),
-  isMergeBoundaryBlocked: () => false,
-  rowHasSpans: () => false,
+  isMergeBoundaryBlocked: (..._args: unknown[]) => false,
+  rowHasSpans: (..._args: unknown[]) => false,
 });
 
-export const GridSparklineProvider: React.FC<React.PropsWithChildren> = ({ children }) =>
+export const GridSparklineProvider: React.FC<React.PropsWithChildren<{ value?: GridSparklineProps }>> = ({ children }) =>
   React.createElement(React.Fragment, null, children);
-export const Sparkline = () => null;
-export const useGridSparkline = () => ({ enabled: false, defaultOptions: {} });
-export const resolveSparklineOptions = () => null;
-export const normalizeSparklineData = () => null;
-export const hasSparklineData = () => false;
-export const buildSparklineTitle = () => null;
+export const Sparkline: React.FC<Record<string, unknown>> = () => null;
+export const useGridSparkline = (..._args: unknown[]) => ({ enabled: false, defaultOptions: {} });
+export const resolveSparklineOptions = (..._args: unknown[]): GridSparklineOptions | null => null;
+export const normalizeSparklineData = (..._args: unknown[]) => null;
+export const hasSparklineData = (..._args: unknown[]) => false;
+export const buildSparklineTitle = (..._args: unknown[]) => null;
 
-export const resolveGridTreeDataPathResolver = () => null;
-export const resolveGridTreeDataPathColumnKeys = () => [];
+export const resolveGridTreeDataPathResolver = (..._args: unknown[]) => null;
+export const resolveGridTreeDataPathColumnKeys = (..._args: unknown[]) => [];
 
-export const useMasterDetail = ({ enabled }: { enabled?: boolean }) => {
+export const useMasterDetail = ({ enabled }: { enabled?: boolean; [key: string]: unknown }) => {
   const expandedRowIdSet = useMemo<Set<string | number>>(() => new Set(), []);
-  const isRowMaster = useCallback(() => false, []);
-  const isExpanded = useCallback(() => false, []);
-  const toggleRow = useCallback(() => undefined, []);
-  const collapseRow = useCallback(() => undefined, []);
-  const detailRowHeightOf = useCallback(() => 0, []);
-  const applyDetailHeights = useCallback((groups: unknown) => groups, []);
+  const isRowMaster = useCallback((..._args: unknown[]) => false, []);
+  const isExpanded = useCallback((..._args: unknown[]) => false, []);
+  const toggleRow = useCallback((..._args: unknown[]) => undefined, []);
+  const collapseRow = useCallback((..._args: unknown[]) => undefined, []);
+  const detailRowHeightOf = useCallback((..._args: unknown[]) => 0, []);
+  const applyDetailHeights = useCallback((groups: GridRowGroup[]) => groups, []);
   return useMemo(
     () => ({
       enabled: enabled && false,
@@ -178,18 +189,18 @@ export const useMasterDetail = ({ enabled }: { enabled?: boolean }) => {
   );
 };
 
-export const getValidationClassNames = () => [];
-export const useGridValidation = () => ({
+export const getValidationClassNames = (..._args: unknown[]) => [];
+export const useGridValidation = (..._args: unknown[]) => ({
   validationState: new Map(),
   revision: 0,
   getCellValidation: () => null,
   validateCellValue: () => ({ state: null, results: [], hasErrors: false, pendingAsync: false }),
   previewCellValue: () => ({ state: null, results: [], hasErrors: false, pendingAsync: false }),
-  validateVisibleRows: () => undefined,
-  validateAll: () => undefined,
-  clearValidation: () => undefined,
+  validateVisibleRows: (..._args: unknown[]) => undefined,
+  validateAll: (..._args: unknown[]) => undefined,
+  clearValidation: (..._args: unknown[]) => undefined,
 });
-export const useGridValidationBridge = ({ indicator }: { indicator: GridValidationIndicator }) => ({
+export const useGridValidationBridge = ({ indicator }: { indicator: GridValidationIndicator; [key: string]: unknown }) => ({
   validationDisplay: {
     enabled: false,
     highlightInvalidCells: false,
@@ -201,19 +212,28 @@ export const useGridValidationBridge = ({ indicator }: { indicator: GridValidati
   },
 });
 
-export const normalizeGridServerRequestColumns = (configured?: GridColumn[]) =>
-  Array.isArray(configured) ? configured.map((column) => ({ key: column.key, label: column.label })) : [];
-export const normalizeGridServerPivotValueColumns = normalizeGridServerRequestColumns;
-export const normalizeGridServerRowModelConfig = (props: any) => ({ enabled: props?.enabled === true });
+export const normalizeGridServerRequestColumns = (configured?: GridServerRowGroupColumnRequest[]) =>
+  configured?.map(({ key, label }) => ({ key, label })) ?? [];
+export const normalizeGridServerPivotValueColumns = (configured?: GridServerRowModelPivotValueColumnRequest[]) =>
+  configured?.map(({ key, label, aggFunc }) => ({ key, label, aggFunc })) ?? [];
+export const normalizeGridServerRowModelConfig = (props?: GridServerRowModelProps) => ({
+  ...props,
+  enabled: props?.enabled === true,
+  grouping: { ...props?.grouping, enabled: false, columns: props?.grouping?.columns ?? [] },
+  treeData: { ...props?.treeData, enabled: false },
+  pivot: { ...props?.pivot, enabled: false, pivotColumns: props?.pivot?.pivotColumns ?? [], valueColumns: props?.pivot?.valueColumns ?? [] },
+});
 export const buildServerGroupingRequest = (args: any) => (args?.enabled ? args : undefined);
 export const buildServerTreeDataRequest = (args: any) => (args?.enabled ? args : undefined);
 export const buildServerPivotRequest = (args: any) => (args?.enabled ? args : undefined);
 export const buildServerHierarchyConfigKey = (args: any) => JSON.stringify(args ?? {});
-export const resolveSsrmDisplayRowIndex = (displayIndex: number) => ({
+export const resolveSsrmDisplayRowIndex = (displayIndex: number, ..._args: unknown[]):
+  | { kind: "base"; baseIndex: number }
+  | { kind: "pending"; event: unknown; offset: number } => ({
   kind: "base" as const,
   baseIndex: Math.max(0, Math.trunc(displayIndex)),
 });
-export const mapSsrmBaseRowIndexToDisplay = (baseRowIndex: number) =>
+export const mapSsrmBaseRowIndexToDisplay = (baseRowIndex: number, ..._args: unknown[]) =>
   Math.max(0, Math.trunc(baseRowIndex));
 
 const DEFAULT_SSRM_TRANSACTION_RESULT = {
@@ -241,29 +261,29 @@ export const useServerRowModel = (args: any) => {
       rowCount: Math.max(0, Math.trunc(args?.rowCount ?? 0)),
       blockSize: Math.max(1, Math.trunc(args?.blockSize ?? 120)),
       version: 0,
-      pivotResultFields: [],
+      pivotResultFields: [] as string[],
       isLoading: false,
-      loadedRows: [],
+      loadedRows: [] as GridRow[],
       rowIndexById: rowIndexByIdRef.current,
       getRow,
-      getRowIndexById: () => -1,
-      isRowLoaded: () => false,
-      ensureRange: () => undefined,
-      refresh: () => undefined,
-      getRowNode: () => null,
-      applyTransaction: () => ({ ...DEFAULT_SSRM_TRANSACTION_RESULT }),
-      applyTransactionAsync: (_transaction: unknown, callback?: (result: typeof DEFAULT_SSRM_TRANSACTION_RESULT) => void) => {
+      getRowIndexById: (..._args: unknown[]) => -1,
+      isRowLoaded: (..._args: unknown[]) => false,
+      ensureRange: (..._args: unknown[]) => undefined,
+      refresh: (..._args: unknown[]) => undefined,
+      getRowNode: (..._args: unknown[]) => null,
+      applyTransaction: (..._args: unknown[]) => ({ ...DEFAULT_SSRM_TRANSACTION_RESULT }),
+      applyTransactionAsync: (_transaction: unknown, callback?: (result: GridServerRowModelTransactionResult) => void) => {
         callback?.({ ...DEFAULT_SSRM_TRANSACTION_RESULT });
       },
-      flushAsyncTransactions: () => undefined,
-      retryFailedLoads: () => undefined,
-      cancelOutstandingLoads: () => undefined,
+      flushAsyncTransactions: (..._args: unknown[]) => undefined,
+      retryFailedLoads: (..._args: unknown[]) => undefined,
+      cancelOutstandingLoads: (..._args: unknown[]) => undefined,
       hierarchicalStoresActive: false,
     }),
     [args?.blockSize, args?.rowCount, getRow],
   );
 };
-export const useServerRowModelApiRef = ({ enabled, apiRef }: { enabled?: boolean; apiRef?: React.MutableRefObject<unknown> }) => {
+export const useServerRowModelApiRef = ({ enabled, apiRef }: { enabled?: boolean; apiRef?: React.MutableRefObject<GridServerRowModelApi | null> | null; [key: string]: unknown }) => {
   useEffect(() => {
     if (!apiRef) return;
     apiRef.current = enabled ? null : null;
@@ -272,13 +292,13 @@ export const useServerRowModelApiRef = ({ enabled, apiRef }: { enabled?: boolean
     };
   }, [apiRef, enabled]);
 };
-export const useSsrmViewportScrollCycle = () => ({ startSsrmScrollCycle: () => undefined });
-export const useSsrmGroupToggleOverlay = ({ ssrmRowCount }: { ssrmRowCount: number }) => ({
-  handleServerGroupToggle: () => undefined,
+export const useSsrmViewportScrollCycle = (..._args: unknown[]) => ({ startSsrmScrollCycle: () => undefined });
+export const useSsrmGroupToggleOverlay = ({ ssrmRowCount }: { ssrmRowCount: number; [key: string]: unknown }) => ({
+  handleServerGroupToggle: (..._args: unknown[]) => undefined,
   resolveServerGroupExpandedState: (_path: string, fallback: boolean) => fallback,
-  isServerGroupTogglePending: () => false,
+  isServerGroupTogglePending: (..._args: unknown[]) => false,
   hasPendingServerGroupCollapse: false,
-  ssrmPendingPlaceholderOverlay: null,
+  ssrmPendingPlaceholderOverlay: null as { key: string } | null,
   ssrmCollapsedPlaceholderMaskRowCacheRef: useRef<Map<string, GridRow>>(new Map()),
   getSsrmPendingPlaceholderRow: (_event: unknown, offset: number): GridRow => ({
     id: `__ssrm-pending__:${Math.max(0, Math.trunc(offset))}`,
@@ -286,7 +306,7 @@ export const useSsrmGroupToggleOverlay = ({ ssrmRowCount }: { ssrmRowCount: numb
   }),
   ssrmViewRowCount: Math.max(0, Math.trunc(ssrmRowCount)),
 });
-export const useSsrmLoadingUiState = () => ({
-  suppressNextGlobalLoadingIndicator: () => undefined,
+export const useSsrmLoadingUiState = (..._args: unknown[]) => ({
+  suppressNextGlobalLoadingIndicator: (..._args: unknown[]) => undefined,
   globalLoadingIndicatorTimerRef: useRef<number | null>(null),
 });

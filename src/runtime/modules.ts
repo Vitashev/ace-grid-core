@@ -31,7 +31,7 @@ import type {
   FormulaGridEvalOptions,
   FormulaGridState,
   FormulaReferenceRange,
-} from "../runtime/publicCoreSupport";
+} from "./publicCoreSupport";
 import type { useFormulaRangePick } from "./publicCoreSupport";
 import type {
   exportGridToExcel,

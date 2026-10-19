@@ -35,7 +35,7 @@ import {
 } from "../features/search";
 import { getGridRuntimeModules } from "../runtime/modules";
 import { cx } from "../utils/cx";
-import type { GridValidationDisplayConfig } from "./publicCoreSupport";
+import type { GridValidationDisplayConfig } from "../runtime/publicCoreSupport";
 import {
   CELL_BORDER,
   EDIT_BORDER,
