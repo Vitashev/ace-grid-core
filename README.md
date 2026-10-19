@@ -72,10 +72,13 @@ export function CustomersGrid() {
 
 | Runtime | Supported versions |
 | --- | --- |
-| React | 18.2 and 19.x |
-| React DOM | 18.2 and 19.x |
+| React | Peer range >=18.2.0 <20.0.0; tested 18.2.0 and 19.1.1 |
+| React DOM | Peer range >=18.2.0 <20.0.0; tested 18.2.0 and 19.1.1 |
 | TypeScript | Declarations included |
 | Browsers | Current evergreen browsers |
+
+The published Pro/Enterprise 1.0.16 packages require React/React DOM 19.1.1,
+so the Core peer range should not be read as a paid-package compatibility claim.
 
 The release checks install the packed Core package in clean React 18 and React
 19 consumer projects. If your application finds a compatibility gap, please
@@ -139,6 +142,11 @@ Framework guides:
 - AG Grid alternative: https://ace-grid.com/guides/ag-grid-alternative
 - MUI Data Grid alternative: https://ace-grid.com/guides/mui-data-grid-alternative
 - Public Core source: https://github.com/Vitashev/ace-grid-core
+
+## Contributing
+
+See [CONTRIBUTING.md](https://github.com/Vitashev/ace-grid-core/blob/main/CONTRIBUTING.md)
+for reproducible builds, tests, and the local-source React example.
 
 ## License
 

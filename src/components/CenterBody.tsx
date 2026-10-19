@@ -23,7 +23,7 @@ import type {
   ColumnResizeHandleOverrides,
   ColumnResizeHandleProps,
 } from "../features/resize";
-import type { GridValidationDisplayConfig } from "./publicCoreSupport";
+import type { GridValidationDisplayConfig } from "../runtime/publicCoreSupport";
 
 type CenterBodyProps = {
   enableVirtualization: boolean;

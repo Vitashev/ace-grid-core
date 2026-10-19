@@ -1,4 +1,4 @@
-import type { ComponentType, CSSProperties, ReactNode } from "react";
+import type { ComponentType, CSSProperties, ReactNode, JSX } from "react";
 import type {
   CellFormat,
   GridColumn,

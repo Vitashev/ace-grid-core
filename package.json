@@ -13,7 +13,10 @@
     }
   },
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.build.json"
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "test": "node --test tests/*.test.mjs",
+    "test:types": "tsc --noEmit --strict --skipLibCheck false --target ES2020 --module ESNext --moduleResolution bundler --jsx react-jsx tests/declarations.ts",
+    "test:consumer": "node tests/packed-consumer.mjs"
   },
   "publishConfig": {
     "access": "public"
@@ -51,5 +54,18 @@
     "table",
     "typescript"
   ],
-  "main": "./dist/core.cjs"
+  "main": "./dist/core.cjs",
+  "engines": {
+    "node": "^20.19.0 || >=22.12.0"
+  },
+  "devDependencies": {
+    "@types/node": "20.19.43",
+    "@types/react": "18.3.26",
+    "@types/react-dom": "18.3.7",
+    "jsdom": "26.1.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1",
+    "typescript": "5.9.3",
+    "vite": "7.3.7"
+  }
 }
