@@ -8,12 +8,15 @@ npm ci
 npm run build
 npm test
 npm run test:types
+npm run test:consumer
 ```
 
 The build bundles `src/core.ts` to ESM and CommonJS and runs TypeScript to emit
 checked declarations in `dist`. React and ReactDOM stay external to the library.
 The smoke tests load both module formats and mount, sort, and update Core in
-jsdom. They do not replace browser layout, virtualization, or drag-and-drop tests.
+jsdom. `test:consumer` installs a locally packed tarball in temporary React 18
+and React 19 projects with matching typings and runs the same checks. It requires
+registry access and does not publish anything. These tests do not replace browser layout, virtualization, or drag-and-drop tests.
 
 ## Exercise your source changes
 
