@@ -34,6 +34,8 @@ import type {
 type UseGridDataCommandsArgs = {
   allColumns: GridColumn[];
   rows: GridRow[];
+  undoStack: GridRow[][];
+  redoStack: GridRow[][];
   mergedCells: GridMergedCell[];
   columnWidths: Record<string, number>;
   rowHeights: Record<string, number>;
@@ -66,6 +68,8 @@ type UseGridDataCommandsArgs = {
 export const useGridDataCommands = ({
   allColumns,
   rows,
+  undoStack,
+  redoStack,
   mergedCells,
   columnWidths,
   rowHeights,
@@ -94,31 +98,23 @@ export const useGridDataCommands = ({
   columnDefsSignatureRef,
   setColumnDefsState,
 }: UseGridDataCommandsArgs) => {
+  // Keep state updaters pure: StrictMode can replay them. Transfer snapshots
+  // from the committed render in the command, rather than nesting setters.
   const undo = useCallback(() => {
-    setUndoStack((prev) => {
-      if (!prev.length) return prev;
-      setRows((current) => {
-        const last = prev[prev.length - 1];
-        setRedoStack((redoStack) => [...redoStack, current]);
-        requestFullFormulaRecalc();
-        return last;
-      });
-      return prev.slice(0, -1);
-    });
-  }, [requestFullFormulaRecalc, setRedoStack, setRows, setUndoStack]);
+    if (!undoStack.length) return;
+    setRows(undoStack[undoStack.length - 1]);
+    setRedoStack((prev) => [...prev, rows]);
+    setUndoStack((prev) => prev.slice(0, -1));
+    requestFullFormulaRecalc();
+  }, [undoStack, rows, requestFullFormulaRecalc, setRedoStack, setRows, setUndoStack]);
 
   const redo = useCallback(() => {
-    setRedoStack((prev) => {
-      if (!prev.length) return prev;
-      setRows((current) => {
-        const next = prev[prev.length - 1];
-        setUndoStack((undoStack) => [...undoStack, current]);
-        requestFullFormulaRecalc();
-        return next;
-      });
-      return prev.slice(0, -1);
-    });
-  }, [requestFullFormulaRecalc, setRedoStack, setRows, setUndoStack]);
+    if (!redoStack.length) return;
+    setRows(redoStack[redoStack.length - 1]);
+    setUndoStack((prev) => [...prev, rows]);
+    setRedoStack((prev) => prev.slice(0, -1));
+    requestFullFormulaRecalc();
+  }, [redoStack, rows, requestFullFormulaRecalc, setRedoStack, setRows, setUndoStack]);
 
   const clearData = useCallback(() => {
     setRows((prev) => {
