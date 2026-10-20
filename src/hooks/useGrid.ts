@@ -2346,6 +2346,9 @@ export const useGridInternal = ({
     (snapshot: GridRow[]) => {
       if (!enableUndo) return;
       setUndoStack((prev) => {
+        // Row updaters can be replayed by React StrictMode. Recording the same
+        // immutable snapshot twice must not create a second history step.
+        if (prev[prev.length - 1] === snapshot) return prev;
         const next = prev.length >= maxUndoSteps ? prev.slice(1) : prev.slice();
         next.push(snapshot);
         return next;
@@ -2917,6 +2920,8 @@ export const useGridInternal = ({
   } = useGridDataCommands({
     allColumns,
     rows,
+    undoStack,
+    redoStack,
     mergedCells,
     columnWidths,
     rowHeights,
